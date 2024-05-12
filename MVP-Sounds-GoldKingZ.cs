@@ -20,7 +20,7 @@ namespace MVP_Sounds_GoldKingZ;
 public class MVPSoundsGoldKingZ : BasePlugin
 {
     public override string ModuleName => "Custom MVP Sounds (Custom MVP Sounds + Vips)";
-    public override string ModuleVersion => "1.0.0";
+    public override string ModuleVersion => "1.0.1";
     public override string ModuleAuthor => "Gold KingZ";
     public override string ModuleDescription => "https://github.com/oqyh";
     internal static IStringLocalizer? Stringlocalizer;
@@ -178,7 +178,15 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 string jsonData = File.ReadAllText(jsonFilePath);
                 var data = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonData);
                 if (data == null) return HookResult.Continue;
-                var VoteGameModeMenu = new CenterHtmlMenu(Localizer["menu.music"]);
+                IMenu VoteGameModeMenu;
+                if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
+                {
+                    VoteGameModeMenu = new CenterHtmlMenu(Localizer["menu.music"]);
+                }
+                else
+                {
+                    VoteGameModeMenu = new ChatMenu(Localizer["menu.music"]);
+                }
                 VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false));
                 foreach (var key in data.Keys)
                 {
@@ -187,8 +195,21 @@ public class MVPSoundsGoldKingZ : BasePlugin
                     bool isPreviewAble = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValue) ? PreviewValue : false;
                     VoteGameModeMenu.AddMenuOption(ChoosenKitKey, (Player, option) => HandleMenu(Player, option, key, isVIP, isPreviewAble));
                 }
-
-                MenuManager.OpenCenterHtmlMenu(this, Player, VoteGameModeMenu);
+                if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
+                {
+                    if (VoteGameModeMenu is CenterHtmlMenu centerHtmlMenu)
+                    {
+                        MenuManager.OpenCenterHtmlMenu(this, Player, centerHtmlMenu);
+                    }
+                }
+                else
+                {
+                   if (VoteGameModeMenu is ChatMenu chatMenu)
+                    {
+                        MenuManager.OpenChatMenu(Player, chatMenu);
+                    }
+                }
+                
             }catch{}
         }
         return HookResult.Continue;
@@ -248,14 +269,37 @@ public class MVPSoundsGoldKingZ : BasePlugin
         if(isPreviewAble)
         {
             var choosedkit =  option.Text;
-            var VoteGameModeMenu = new CenterHtmlMenu(Localizer["menu.are.you.sure", choosedkit]);
+            
+            IMenu VoteGameModeMenu;
+            if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
+            {
+                VoteGameModeMenu = new CenterHtmlMenu(Localizer["menu.are.you.sure", choosedkit]);
+            }
+            else
+            {
+                VoteGameModeMenu = new ChatMenu(Localizer["menu.are.you.sure", choosedkit]);
+            }
+
             string[] answers = { Localizer["menu.answer.yes"], Localizer["menu.answer.no"]};
 
             foreach (string answer in answers)
             {
                 VoteGameModeMenu.AddMenuOption(answer, (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isPreviewAble, choosedkit));
             }
-            MenuManager.OpenCenterHtmlMenu(this, Player, VoteGameModeMenu);
+            if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
+            {
+                if (VoteGameModeMenu is CenterHtmlMenu centerHtmlMenu)
+                {
+                    MenuManager.OpenCenterHtmlMenu(this, Player, centerHtmlMenu);
+                }
+            }
+            else
+            {
+                if (VoteGameModeMenu is ChatMenu chatMenu)
+                {
+                    MenuManager.OpenChatMenu(Player, chatMenu);
+                }
+            }
             return;
         }
         if (!Globals.Choosed_MVP.ContainsKey(Player.SteamID))

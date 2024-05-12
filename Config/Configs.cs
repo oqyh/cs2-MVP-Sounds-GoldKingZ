@@ -95,6 +95,7 @@ namespace MVP_Sounds_GoldKingZ.Config
         {
             public bool MVP_UseMySql { get; set; }
             public bool MVP_ForceDisableDefaultMVP_ToAll { get; set; }
+            public bool MVP_ChangeMVPMenuFromChatToCentre { get; set; }
             public string MVP_InGameMenu { get; set; }
             public string MVP_VipMusicKit { get; set; }
             public string MVP_OnlyAllowTheseGroupsCanMVP { get; set; }
@@ -106,6 +107,7 @@ namespace MVP_Sounds_GoldKingZ.Config
             {
                 MVP_UseMySql = false;
                 MVP_ForceDisableDefaultMVP_ToAll = false;
+                MVP_ChangeMVPMenuFromChatToCentre = true;
                 MVP_InGameMenu = "!mvp,!mvps,!mvpsound";
                 MVP_VipMusicKit = "@css/root,@css/admin,@css/vip,#css/admin,#css/vip";
                 MVP_OnlyAllowTheseGroupsCanMVP = "";
