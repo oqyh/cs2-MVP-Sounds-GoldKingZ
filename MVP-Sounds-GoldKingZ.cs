@@ -14,7 +14,7 @@ namespace MVP_Sounds_GoldKingZ;
 public class MVPSoundsGoldKingZ : BasePlugin
 {
     public override string ModuleName => "Custom MVP Sounds (Custom MVP Sounds + Vips)";
-    public override string ModuleVersion => "1.0.2";
+    public override string ModuleVersion => "1.0.3";
     public override string ModuleAuthor => "Gold KingZ";
     public override string ModuleDescription => "https://github.com/oqyh";
     internal static IStringLocalizer? Stringlocalizer;
@@ -446,17 +446,19 @@ public class MVPSoundsGoldKingZ : BasePlugin
         var PlayerSteamID = Player.SteamID;
 
         if(Configs.GetConfigData().MVP_ForceDisableDefaultMVP_ToAll)
-        {
-            Player.MVPs = 0;
-            Schema.SetSchemaValue(Player.PlayerPawn.Value!.Handle, "CCSPlayerController", "m_iMVPs", 0);
-            Utilities.SetStateChanged(Player.PlayerPawn.Value, "CCSPlayerController", "m_iMVPs");
+        {   var allplayerz = Helper.GetAllController();
+            allplayerz.ForEach(playerz =>
+            {
+                if (playerz != null && playerz.IsValid && !playerz.IsBot)
+                {
+                    playerz.MVPs = 0;
+                }
+            });
         }
 
         if (Globals.Choosed_MVP.ContainsKey(PlayerSteamID))
         {
             Player.MVPs = 0;
-            Schema.SetSchemaValue(Player.PlayerPawn.Value!.Handle, "CCSPlayerController", "m_iMVPs", 0);
-            Utilities.SetStateChanged(Player.PlayerPawn.Value, "CCSPlayerController", "m_iMVPs");
             string MVPKitChoosen = Globals.Choosed_MVP[PlayerSteamID];
 
             try
@@ -501,6 +503,8 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 {
                     if (players != null && players.IsValid && !players.IsBot)
                     {
+                        
+
                         if (Globals.playedPaths.Count == soundPaths.Count)
                         {
                             Globals.playedPaths.Clear();
@@ -595,7 +599,7 @@ public class MVPSoundsGoldKingZ : BasePlugin
         {
             foreach (var player in Helper.GetAllController())
             {
-                if (player == null || !player.IsValid || !player.PawnIsAlive || player.IsBot || player.IsHLTV) continue;
+                if (player == null || !player.IsValid || player.IsBot || player.IsHLTV) continue;
                 if(Globals.Show_Center)
                 {
                     StringBuilder builder = new StringBuilder();
