@@ -1,6 +1,6 @@
 {
 	
-	"player.not.allowed": "{green}Gold KingZ {grey}| {darkred}MVP Menu Is For {lime}VIPS {darkred}Only",
+    "player.not.allowed": "{green}Gold KingZ {grey}| {darkred}MVP Menu Is For {lime}VIPS {darkred}Only",
     "player.not.allowed.musickit": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
     "player.preview": "{green}Gold KingZ {grey}| Playing {purple}{0} {grey}For You Only",
     "player.musickit.selected": "{green}Gold KingZ {grey}| You Select Music Kit {purple}{0}",
