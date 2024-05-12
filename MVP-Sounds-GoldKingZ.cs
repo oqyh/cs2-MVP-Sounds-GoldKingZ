@@ -1,26 +1,20 @@
 using System.Text;
+using MySqlConnector;
+using Newtonsoft.Json;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
-using CounterStrikeSharp.API.Modules.Commands;
-using System.Text.Json.Serialization;
+using MVP_Sounds_GoldKingZ.Config;
 using Microsoft.Extensions.Localization;
-using CounterStrikeSharp.API.Modules.Admin;
-using CounterStrikeSharp.API.Core.Attributes.Registration;
+using CounterStrikeSharp.API.Modules.Menu;
 using CounterStrikeSharp.API.Modules.Timers;
 using CounterStrikeSharp.API.Modules.Memory;
-using Newtonsoft.Json;
-using MVP_Sounds_GoldKingZ.Config;
-using CounterStrikeSharp.API.Modules.Entities;
-using CounterStrikeSharp.API.Modules.Menu;
-using MySqlConnector;
 
 namespace MVP_Sounds_GoldKingZ;
-
 
 public class MVPSoundsGoldKingZ : BasePlugin
 {
     public override string ModuleName => "Custom MVP Sounds (Custom MVP Sounds + Vips)";
-    public override string ModuleVersion => "1.0.1";
+    public override string ModuleVersion => "1.0.2";
     public override string ModuleAuthor => "Gold KingZ";
     public override string ModuleDescription => "https://github.com/oqyh";
     internal static IStringLocalizer? Stringlocalizer;
@@ -286,6 +280,7 @@ public class MVPSoundsGoldKingZ : BasePlugin
             {
                 VoteGameModeMenu.AddMenuOption(answer, (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isPreviewAble, choosedkit));
             }
+            VoteGameModeMenu.AddMenuOption(Localizer["menu.back"], (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isPreviewAble, choosedkit));
             if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
             {
                 if (VoteGameModeMenu is CenterHtmlMenu centerHtmlMenu)
@@ -399,6 +394,47 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 }
             }
             catch { }
+        }else if(option.Text == Localizer["menu.back"])
+        {
+            try
+            {
+                string jsonFilePath = Path.Combine(ModuleDirectory, "../../plugins/MVP-Sounds-GoldKingZ/config/MVP_Settings.json");
+                string jsonData = File.ReadAllText(jsonFilePath);
+                var data = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonData);
+                if (data == null) return;
+                IMenu VoteGameModeMenu;
+                if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
+                {
+                    VoteGameModeMenu = new CenterHtmlMenu(Localizer["menu.music"]);
+                }
+                else
+                {
+                    VoteGameModeMenu = new ChatMenu(Localizer["menu.music"]);
+                }
+                VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false));
+                foreach (var key in data.Keys)
+                {
+                    string ChoosenKitKeyy = data[key]["MVP_Kit_Name"];
+                    bool isVIPs = data[key].ContainsKey("VIP") && bool.TryParse(data[key]["VIP"].ToString(), out bool vipValue) ? vipValue : false;
+                    bool isPreviewAblee = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValue) ? PreviewValue : false;
+                    VoteGameModeMenu.AddMenuOption(ChoosenKitKeyy, (Player, option) => HandleMenu(Player, option, key, isVIPs, isPreviewAblee));
+                }
+                if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
+                {
+                    if (VoteGameModeMenu is CenterHtmlMenu centerHtmlMenu)
+                    {
+                        MenuManager.OpenCenterHtmlMenu(this, Player, centerHtmlMenu);
+                    }
+                }
+                else
+                {
+                   if (VoteGameModeMenu is ChatMenu chatMenu)
+                    {
+                        MenuManager.OpenChatMenu(Player, chatMenu);
+                    }
+                }
+                
+            }catch{}
         }
     }
 

@@ -23,5 +23,6 @@
     "menu.are.you.sure": "You Want [ {0} ] ?",
     "menu.answer.yes": "Yes",
     "menu.answer.no": "No, Preview It First",
+    "menu.back": "-> Back",
     "menu.disabled": "Disabled/Remove MVP"
 }

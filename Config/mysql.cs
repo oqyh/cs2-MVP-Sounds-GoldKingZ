@@ -1,3 +1,4 @@
+using MVP_Sounds_GoldKingZ.Config;
 using MySqlConnector;
 using System.Data;
 
@@ -47,13 +48,21 @@ public class MySqlDataManager
 
     public static async Task SaveToMySqlAsync(ulong PlayerSteamID, string MusicKit, DateTime DateAndTime, MySqlConnection connection, MySqlConnectionSettings connectionSettings)
     {
-        string query = @"INSERT INTO PersonData (PlayerSteamID, MusicKit, DateAndTime)
+        int days = Configs.GetConfigData().MVP_AutoRemovePlayerMySqlOlderThanXDays;
+        string deleteOldRecordsQuery = $"DELETE FROM PersonData WHERE DateAndTime < NOW() - INTERVAL {days} DAY";
+
+        string insertOrUpdateQuery = @"INSERT INTO PersonData (PlayerSteamID, MusicKit, DateAndTime)
                         VALUES (@PlayerSteamID, @MusicKit, @DateAndTime)
                         ON DUPLICATE KEY UPDATE MusicKit = VALUES(MusicKit), DateAndTime = VALUES(DateAndTime)";
 
         try
         {
-            using (var command = new MySqlCommand(query, connection))
+            using (var deleteCommand = new MySqlCommand(deleteOldRecordsQuery, connection))
+            {
+                await deleteCommand.ExecuteNonQueryAsync();
+            }
+
+            using (var command = new MySqlCommand(insertOrUpdateQuery, connection))
             {
                 command.Parameters.AddWithValue("@PlayerSteamID", PlayerSteamID);
                 command.Parameters.AddWithValue("@MusicKit", MusicKit);
@@ -99,25 +108,43 @@ public class MySqlDataManager
 
     public static async Task<PersonData> RetrievePersonDataByIdAsync(ulong targetId, MySqlConnection connection)
     {
-        string query = "SELECT * FROM PersonData WHERE PlayerSteamID = @PlayerSteamID";
+        int days = Configs.GetConfigData().MVP_AutoRemovePlayerMySqlOlderThanXDays;
+        string deleteOldRecordsQuery = $"DELETE FROM PersonData WHERE DateAndTime < NOW() - INTERVAL {days} DAY";
+
+        string retrieveQuery = "SELECT * FROM PersonData WHERE PlayerSteamID = @PlayerSteamID";
         var personData = new PersonData();
 
-        using (var command = new MySqlCommand(query, connection))
+        try
         {
-            command.Parameters.AddWithValue("@PlayerSteamID", targetId);
-
-            using (var reader = await command.ExecuteReaderAsync())
+            using (var deleteCommand = new MySqlCommand(deleteOldRecordsQuery, connection))
             {
-                if (await reader.ReadAsync())
+                await deleteCommand.ExecuteNonQueryAsync();
+            }
+
+            using (var command = new MySqlCommand(retrieveQuery, connection))
+            {
+                command.Parameters.AddWithValue("@PlayerSteamID", targetId);
+
+                using (var reader = await command.ExecuteReaderAsync())
                 {
-                    personData = new PersonData
+                    if (await reader.ReadAsync())
                     {
-                        PlayerSteamID = Convert.ToUInt64(reader["PlayerSteamID"]),
-                        MusicKit = Convert.ToString(reader["MusicKit"]),
-                        DateAndTime = Convert.ToDateTime(reader["DateAndTime"])
-                    };
+                        personData = new PersonData
+                        {
+                            PlayerSteamID = Convert.ToUInt64(reader["PlayerSteamID"]),
+                            MusicKit = Convert.ToString(reader["MusicKit"]),
+                            DateAndTime = Convert.ToDateTime(reader["DateAndTime"])
+                        };
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"======================== ERROR =============================");
+            Console.WriteLine($"Error retrieving data from MySQL: {ex.Message}");
+            Console.WriteLine($"======================== ERROR =============================");
+            throw;
         }
         return personData;
     }

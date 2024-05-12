@@ -100,6 +100,7 @@ namespace MVP_Sounds_GoldKingZ.Config
             public string MVP_VipMusicKit { get; set; }
             public string MVP_OnlyAllowTheseGroupsCanMVP { get; set; }
             public int MVP_AutoRemovePlayerCookieOlderThanXDays { get; set; }
+            public int MVP_AutoRemovePlayerMySqlOlderThanXDays { get; set; }
             public string empty { get; set; }
             public string Information_For_You_Dont_Delete_it { get; set; }
             
@@ -112,6 +113,7 @@ namespace MVP_Sounds_GoldKingZ.Config
                 MVP_VipMusicKit = "@css/root,@css/admin,@css/vip,#css/admin,#css/vip";
                 MVP_OnlyAllowTheseGroupsCanMVP = "";
                 MVP_AutoRemovePlayerCookieOlderThanXDays = 7;
+                MVP_AutoRemovePlayerMySqlOlderThanXDays = 7;
                 empty = "-----------------------------------------------------------------------------------";
                 Information_For_You_Dont_Delete_it = " Vist  [https://github.com/oqyh/cs2-MVP-Sounds-GoldKingZ/tree/main?tab=readme-ov-file#-configuration-] To Understand All Above";
             }
