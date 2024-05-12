@@ -1,4 +1,4 @@
-# [CS2] MVP-Sounds-GoldKingZ (1.0.0)
+# [CS2] MVP-Sounds-GoldKingZ (1.0.1)
 
 ### Custom MVP Sounds (Custom MVP Sounds + Vips)
 
@@ -31,6 +31,9 @@
   //true: Will Disable All Mvps
   //false: Will Disable Only Who Have Custom MVP
   "MVP_ForceDisableDefaultMVP_ToAll": false,
+
+  //Change MVP Display Menu From Chat To Centre?
+  "MVP_ChangeMVPMenuFromChatToCentre": false,
 
   //Toggle In Game To Show MVP 
   "MVP_InGameMenu": "!mvp,!mvps,!mvpsound",
@@ -129,6 +132,9 @@
 
 ## .:[ Change Log ]:.
 ```
+(1.0.1)
+-Added MVP_ChangeMVPMenuFromChatToCentre
+
 (1.0.0)
 -Initial Release
 ```
