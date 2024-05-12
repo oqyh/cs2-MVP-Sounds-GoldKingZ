@@ -55,7 +55,7 @@
 
 > [!NOTE]
 > Download https://github.com/Source2ZE/MultiAddonManager  With Gold KingZ WorkShop                                                                                                                               
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3230015783                                                                                                                             
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3244740528                                                                                                                             
 > mm_extra_addons 3244740528                                                                                                                        
 > You Can Find WorkShop Path Sounds In  https://github.com/oqyh/cs2-MVP-Sounds-GoldKingZ/blob/main/sounds/Gold%20KingZ%20WorkShop%20Sounds.txt                                                                                                                           
                                                                                                                        
