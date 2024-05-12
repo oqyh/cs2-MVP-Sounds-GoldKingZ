@@ -1,18 +1,6 @@
 {
-    //==========================
-    //        Cores
-    //==========================
-    //{Yellow} {Gold} {Silver} {Blue} {DarkBlue} {BlueGrey} {Magenta} {LightRed}
-    //{LightBlue} {Olive} {Lime} {Red} {Purple} {Grey}
-    //{Default} {White} {Darkred} {Green} {LightYellow}
-    //==========================
-    //        Outros
-    //==========================
-    //<br> = Proxima linha no hud central
-    //{nextline} = Printa na próxima linha
-    //==========================
 
-	"player.not.allowed": "{green}Gold KingZ {grey}| {darkred}Menu MVP é somente para {lime}VIPS",
+    "player.not.allowed": "{green}Gold KingZ {grey}| {darkred}Menu MVP é somente para {lime}VIPS",
     "player.not.allowed.musickit": "{green}Gold KingZ {grey}| Essa música é {darkred}somente para Vips",
     "player.preview": "{green}Gold KingZ {grey}| Tocando {purple}{0} {grey}somente para você.",
     "player.musickit.selected": "{green}Gold KingZ {grey}| Você selecionou a música {purple}{0}",
