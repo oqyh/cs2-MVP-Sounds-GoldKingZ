@@ -41,7 +41,7 @@
   //Only Allow These Groups To Have Access To MVP_InGameMenu (Making Empty "" Means Everyone Has Access) [ex of groups: "@css/root,@css/admin,#css/admin"]
   "MVP_OnlyAllowTheseGroupsCanMVP": "",
 
-  //Auto Delete Inactive Players Cookies Older Than X Days plugins/MVP-Sounds-GoldKingZ/Cookies/Kill_Sound_Cookies.json
+  //Auto Delete Inactive Players Cookies Older Than X Days plugins/MVP-Sounds-GoldKingZ/Cookies/MVP_Sounds_Cookies.json
   "MVP_AutoRemovePlayerCookieOlderThanXDays": 7,
 }
 ```
