@@ -1,4 +1,4 @@
-# [CS2] MVP-Sounds-GoldKingZ (1.0.2)
+# [CS2] MVP-Sounds-GoldKingZ (1.0.3)
 
 ### Custom MVP Sounds (Custom MVP Sounds + Vips)
 
@@ -136,6 +136,10 @@
 
 ## .:[ Change Log ]:.
 ```
+(1.0.3)
+-Fix Crash
+-Fix Message Centre and  Centre Bottom Not Shown To Dead People
+
 (1.0.2)
 -Added MVP_AutoRemovePlayerMySqlOlderThanXDays
 -Added Back In Menu "menu.back"
