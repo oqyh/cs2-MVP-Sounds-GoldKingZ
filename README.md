@@ -1,4 +1,4 @@
-# [CS2] MVP-Sounds-GoldKingZ (1.0.1)
+# [CS2] MVP-Sounds-GoldKingZ (1.0.2)
 
 ### Custom MVP Sounds (Custom MVP Sounds + Vips)
 
@@ -46,6 +46,9 @@
 
   //Auto Delete Inactive Players Cookies Older Than X Days plugins/MVP-Sounds-GoldKingZ/Cookies/MVP_Sounds_Cookies.json
   "MVP_AutoRemovePlayerCookieOlderThanXDays": 7,
+
+  //Auto Delete Inactive Players Cookies Older Than X Days In MySql
+  "MVP_AutoRemovePlayerMySqlOlderThanXDays": 7,
 }
 ```
 
@@ -88,50 +91,55 @@
 ## .:[ Language ]:.
 ```json
 {
-    //==========================
-    //        Colors
-    //==========================
-    //{Yellow} {Gold} {Silver} {Blue} {DarkBlue} {BlueGrey} {Magenta} {LightRed}
-    //{LightBlue} {Olive} {Lime} {Red} {Purple} {Grey}
-    //{Default} {White} {Darkred} {Green} {LightYellow}
-    //==========================
-    //        Other
-    //==========================
-    //<br> = Next Line On Center Hud 
-    //{nextline} = Print On Next Line
-    //==========================
+	//==========================
+	//        Colors
+	//==========================
+	//{Yellow} {Gold} {Silver} {Blue} {DarkBlue} {BlueGrey} {Magenta} {LightRed}
+	//{LightBlue} {Olive} {Lime} {Red} {Purple} {Grey}
+	//{Default} {White} {Darkred} {Green} {LightYellow}
+	//==========================
+	//        Other
+	//==========================
+	//<br> = Next Line On Center Hud 
+	//{nextline} = Print On Next Line
+	//==========================
 	
 	
-  "player.not.allowed": "{green}Gold KingZ {grey}| {darkred}MVP Menu Is For {lime}VIPS {darkred}Only",
-  "player.not.allowed.musickit": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
-  "player.preview": "{green}Gold KingZ {grey}| Playing {purple}{0} {grey}For You Only",
-  "player.musickit.selected": "{green}Gold KingZ {grey}| You Select Music Kit {purple}{0}",
-  "player.musickit.disabled": "{green}Gold KingZ {grey}| MVP Music Kit Now {darkred}Disabled",
-  
-  
-  "now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
-  "now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <font color='white'>Playing <font color='green'>{1} </font>",
-  "now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
-  
-  "MVP_2.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull1.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
-  
-  "MVP_12.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/9mm.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
-  
-  "MVP_13.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
-  "MVP_13.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull2.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
-  "MVP_13.now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
-  
-  "menu.music": ".:[ Music Menu ]:.",
-  "menu.are.you.sure": "You Want [ {0} ] ?",
-  "menu.answer.yes": "Yes",
-  "menu.answer.no": "No, Preview It First",
-  "menu.disabled": "Disabled/Remove MVP"
+	"player.not.allowed": "{green}Gold KingZ {grey}| {darkred}MVP Menu Is For {lime}VIPS {darkred}Only",
+	"player.not.allowed.musickit": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
+	"player.preview": "{green}Gold KingZ {grey}| Playing {purple}{0} {grey}For You Only",
+	"player.musickit.selected": "{green}Gold KingZ {grey}| You Select Music Kit {purple}{0}",
+	"player.musickit.disabled": "{green}Gold KingZ {grey}| MVP Music Kit Now {darkred}Disabled",
+	
+	
+	"now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	"now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
+	
+	"MVP_2.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull1.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	
+	"MVP_12.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/9mm.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	
+	"MVP_13.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_13.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull2.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	"MVP_13.now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
+	
+	"menu.music": ".:[ Music Menu ]:.",
+	"menu.are.you.sure": "You Want [ {0} ] ?",
+	"menu.answer.yes": "Yes",
+	"menu.answer.no": "No, Preview It First",
+	"menu.back": "-> Back",
+	"menu.disabled": "Disabled/Remove MVP"
 }
 ```
 
 
 ## .:[ Change Log ]:.
 ```
+(1.0.2)
+-Added MVP_AutoRemovePlayerMySqlOlderThanXDays
+-Added Back In Menu "menu.back"
+
 (1.0.1)
 -Added MVP_ChangeMVPMenuFromChatToCentre
 
