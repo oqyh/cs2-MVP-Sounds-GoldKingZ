@@ -19,3 +19,4 @@ sounds/GoldKingZ/MVP/badtaste.vsnd_c
 sounds/GoldKingZ/MVP/badtaste2.vsnd_c
 sounds/GoldKingZ/MVP/beef.vsnd_c
 sounds/GoldKingZ/MVP/demand.vsnd_c
+sounds/GoldKingZ/MVP/melody.vsnd_c
