@@ -19,6 +19,7 @@ public class MySqlDataManager
     {
         public ulong PlayerSteamID { get; set; }
         public string? MusicKit { get; set; }
+        public bool Client_Mute_MVP { get; set; }
         public DateTime DateAndTime { get; set; }
     }
 
@@ -27,6 +28,7 @@ public class MySqlDataManager
         string query = @"CREATE TABLE IF NOT EXISTS PersonData (
                     PlayerSteamID BIGINT UNSIGNED PRIMARY KEY,
                     MusicKit VARCHAR(255),
+                    Client_Mute_MVP BOOLEAN,
                     DateAndTime DATETIME
                 );";
 
@@ -46,14 +48,18 @@ public class MySqlDataManager
         }
     }
 
-    public static async Task SaveToMySqlAsync(ulong PlayerSteamID, string MusicKit, DateTime DateAndTime, MySqlConnection connection, MySqlConnectionSettings connectionSettings)
+    public static async Task SaveToMySqlAsync(ulong PlayerSteamID, string MusicKit, bool Client_Mute_MVP, DateTime DateAndTime, MySqlConnection connection, MySqlConnectionSettings connectionSettings)
     {
         int days = Configs.GetConfigData().MVP_AutoRemovePlayerMySqlOlderThanXDays;
         string deleteOldRecordsQuery = $"DELETE FROM PersonData WHERE DateAndTime < NOW() - INTERVAL {days} DAY";
 
-        string insertOrUpdateQuery = @"INSERT INTO PersonData (PlayerSteamID, MusicKit, DateAndTime)
-                        VALUES (@PlayerSteamID, @MusicKit, @DateAndTime)
-                        ON DUPLICATE KEY UPDATE MusicKit = VALUES(MusicKit), DateAndTime = VALUES(DateAndTime)";
+        string insertOrUpdateQuery = @"
+        INSERT INTO PersonData (PlayerSteamID, MusicKit, Client_Mute_MVP, DateAndTime)
+        VALUES (@PlayerSteamID, @MusicKit, @Client_Mute_MVP, @DateAndTime)
+        ON DUPLICATE KEY UPDATE 
+            MusicKit = VALUES(MusicKit), 
+            Client_Mute_MVP = VALUES(Client_Mute_MVP), 
+            DateAndTime = VALUES(DateAndTime)";
 
         try
         {
@@ -66,6 +72,7 @@ public class MySqlDataManager
             {
                 command.Parameters.AddWithValue("@PlayerSteamID", PlayerSteamID);
                 command.Parameters.AddWithValue("@MusicKit", MusicKit);
+                command.Parameters.AddWithValue("@Client_Mute_MVP", Client_Mute_MVP);
                 command.Parameters.AddWithValue("@DateAndTime", DateAndTime);
 
                 await command.ExecuteNonQueryAsync();
@@ -133,6 +140,7 @@ public class MySqlDataManager
                         {
                             PlayerSteamID = Convert.ToUInt64(reader["PlayerSteamID"]),
                             MusicKit = Convert.ToString(reader["MusicKit"]),
+                            Client_Mute_MVP = Convert.ToBoolean(reader["Client_Mute_MVP"]),
                             DateAndTime = Convert.ToDateTime(reader["DateAndTime"])
                         };
                     }

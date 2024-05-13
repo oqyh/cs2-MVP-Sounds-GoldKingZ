@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Localization;
+using System.Collections.Generic;
 
 namespace MVP_Sounds_GoldKingZ.Config
 {
@@ -98,7 +99,11 @@ namespace MVP_Sounds_GoldKingZ.Config
             public bool MVP_ChangeMVPMenuFromChatToCentre { get; set; }
             public string MVP_InGameMenu { get; set; }
             public string MVP_VipMusicKit { get; set; }
+            public string MVP_VVipMusicKit { get; set; }
+            public string MVP_AdminMusicKit { get; set; }
+            public Dictionary<string, string> MVP_DefaultMusicKitPerSteam { get; set; }
             public string MVP_OnlyAllowTheseGroupsCanMVP { get; set; }
+            public string MVP_OnlyAllowTheseGroupsCanToggleOffMVP { get; set; }
             public int MVP_AutoRemovePlayerCookieOlderThanXDays { get; set; }
             public int MVP_AutoRemovePlayerMySqlOlderThanXDays { get; set; }
             public string empty { get; set; }
@@ -110,8 +115,16 @@ namespace MVP_Sounds_GoldKingZ.Config
                 MVP_ForceDisableDefaultMVP_ToAll = false;
                 MVP_ChangeMVPMenuFromChatToCentre = true;
                 MVP_InGameMenu = "!mvp,!mvps,!mvpsound";
-                MVP_VipMusicKit = "@css/root,@css/admin,@css/vip,#css/admin,#css/vip";
+                MVP_VipMusicKit = "@css/vip,#css/vip";
+                MVP_VVipMusicKit = "@css/vvip,#css/vvip";
+                MVP_AdminMusicKit = "@css/root,#css/admin";
+                MVP_DefaultMusicKitPerSteam = new Dictionary<string, string>
+                {
+                    { "76561198206086993", "MVP_2" },
+                    { "76561198974936845", "MVP_3" }
+                };
                 MVP_OnlyAllowTheseGroupsCanMVP = "";
+                MVP_OnlyAllowTheseGroupsCanToggleOffMVP = "@css/root,@css/admin,@css/vip,#css/admin,#css/vip";
                 MVP_AutoRemovePlayerCookieOlderThanXDays = 7;
                 MVP_AutoRemovePlayerMySqlOlderThanXDays = 7;
                 empty = "-----------------------------------------------------------------------------------";

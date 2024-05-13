@@ -7,14 +7,13 @@ using MVP_Sounds_GoldKingZ.Config;
 using Microsoft.Extensions.Localization;
 using CounterStrikeSharp.API.Modules.Menu;
 using CounterStrikeSharp.API.Modules.Timers;
-using CounterStrikeSharp.API.Modules.Memory;
 
 namespace MVP_Sounds_GoldKingZ;
 
 public class MVPSoundsGoldKingZ : BasePlugin
 {
     public override string ModuleName => "Custom MVP Sounds (Custom MVP Sounds + Vips)";
-    public override string ModuleVersion => "1.0.3";
+    public override string ModuleVersion => "1.0.4";
     public override string ModuleAuthor => "Gold KingZ";
     public override string ModuleDescription => "https://github.com/oqyh";
     internal static IStringLocalizer? Stringlocalizer;
@@ -58,23 +57,25 @@ public class MVPSoundsGoldKingZ : BasePlugin
 
         if (player == null || !player.IsValid || player.IsBot || player.IsHLTV) return HookResult.Continue;
         var playerid = player.SteamID;
-        Helper.PersonData personData = Helper.RetrievePersonDataById(playerid);
-        string musicKit = personData.MusicKit!;
-        if(!string.IsNullOrEmpty(musicKit))
+        foreach (var kvp in Configs.GetConfigData().MVP_DefaultMusicKitPerSteam)
         {
-            if (!Globals.Choosed_MVP.ContainsKey(player.SteamID))
+            if (kvp.Key.ToString() == playerid.ToString())
             {
-                Globals.Choosed_MVP.Add(player.SteamID, musicKit);
-            }
-            if (Globals.Choosed_MVP.ContainsKey(player.SteamID))
-            {
-                Globals.Choosed_MVP[player.SteamID] = musicKit;
+                string defaultmusickit = kvp.Value;
+                if (!Globals.Choosed_MVP.ContainsKey(player.SteamID))
+                {
+                    Globals.Choosed_MVP.Add(player.SteamID, defaultmusickit);
+                }
+                if (Globals.Choosed_MVP.ContainsKey(player.SteamID))
+                {
+                    Globals.Choosed_MVP[player.SteamID] = defaultmusickit;
+                }
+                break;
             }
         }
         
         if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanMVP) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanMVP))
         {
-            
             if (!Globals.allow_groups.ContainsKey(playerid))
             {
                 Globals.allow_groups.Add(playerid, true);
@@ -89,6 +90,64 @@ public class MVPSoundsGoldKingZ : BasePlugin
             }
 
         }
+        if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VVipMusicKit) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_VVipMusicKit))
+        {
+            if (!Globals.vvip_Kit.ContainsKey(playerid))
+            {
+                Globals.vvip_Kit.Add(playerid, true);
+            }
+
+        }
+        if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_AdminMusicKit) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_AdminMusicKit))
+        {
+            if (!Globals.vip_Kit.ContainsKey(playerid))
+            {
+                Globals.vip_Kit.Add(playerid, true);
+            }
+            if (!Globals.vvip_Kit.ContainsKey(playerid))
+            {
+                Globals.vvip_Kit.Add(playerid, true);
+            }
+            if (!Globals.admin_Kit.ContainsKey(playerid))
+            {
+                Globals.admin_Kit.Add(playerid, true);
+            }
+        }
+        if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanToggleOffMVP) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanToggleOffMVP))
+        {
+            if (!Globals.client_cantoggle.ContainsKey(playerid))
+            {
+                Globals.client_cantoggle.Add(playerid, true);
+            }
+        }
+
+
+        Helper.PersonData personData = Helper.RetrievePersonDataById(playerid);
+
+        if(!string.IsNullOrEmpty(personData.MusicKit))
+        {
+            if (!Globals.Choosed_MVP.ContainsKey(player.SteamID))
+            {
+                Globals.Choosed_MVP.Add(player.SteamID, personData.MusicKit);
+            }
+            if (Globals.Choosed_MVP.ContainsKey(player.SteamID))
+            {
+                Globals.Choosed_MVP[player.SteamID] = personData.MusicKit;
+            }
+        }
+
+        if(personData.Client_Mute_MVP)
+        {
+            if (!Globals.client_mute.ContainsKey(player.SteamID))
+            {
+                Globals.client_mute.Add(player.SteamID, true);
+            }
+            if (Globals.client_mute.ContainsKey(player.SteamID))
+            {
+                Globals.client_mute[player.SteamID] = true;
+            }
+        }
+
 
         if(Configs.GetConfigData().MVP_UseMySql)
         {
@@ -109,19 +168,33 @@ public class MVPSoundsGoldKingZ : BasePlugin
                     using (var connection = new MySqlConnection(connectionString))
                     {
                         await connection.OpenAsync();
-                        var personData = await MySqlDataManager.RetrievePersonDataByIdAsync(playerid, connection);
-                        if (personData.PlayerSteamID != 0)
+                        var personDataz = await MySqlDataManager.RetrievePersonDataByIdAsync(playerid, connection);
+                        if (personDataz.PlayerSteamID != 0)
                         {
                             DateTime personDate = DateTime.Now;
-                            if (!Globals.Choosed_MVP.ContainsKey(player.SteamID))
+                            if(!string.IsNullOrEmpty(personDataz.MusicKit))
                             {
-                                Globals.Choosed_MVP.Add(player.SteamID, personData.MusicKit!);
+                                if (!Globals.Choosed_MVP.ContainsKey(player.SteamID))
+                                {
+                                    Globals.Choosed_MVP.Add(player.SteamID, personDataz.MusicKit);
+                                }
+                                if (Globals.Choosed_MVP.ContainsKey(player.SteamID))
+                                {
+                                    Globals.Choosed_MVP[player.SteamID] = personDataz.MusicKit;
+                                }
                             }
-                            if (Globals.Choosed_MVP.ContainsKey(player.SteamID))
+                            if(personDataz.Client_Mute_MVP)
                             {
-                                Globals.Choosed_MVP[player.SteamID] = personData.MusicKit!;
+                                if (!Globals.client_mute.ContainsKey(player.SteamID))
+                                {
+                                    Globals.client_mute.Add(player.SteamID, true);
+                                }
+                                if (Globals.client_mute.ContainsKey(player.SteamID))
+                                {
+                                    Globals.client_mute[player.SteamID] = true;
+                                }
                             }
-                            Helper.SaveToJsonFile(player.SteamID, personData.MusicKit!, DateTime.Now);
+                            Helper.SaveToJsonFile(player.SteamID, personDataz.MusicKit!, personDataz.Client_Mute_MVP, DateTime.Now);
                         }
                         
                     }
@@ -136,6 +209,8 @@ public class MVPSoundsGoldKingZ : BasePlugin
 
             Task.Run(PerformDatabaseOperationAsync);
         }
+
+        
         
         return HookResult.Continue;
     }
@@ -148,8 +223,10 @@ public class MVPSoundsGoldKingZ : BasePlugin
         
 
         if (Player == null || !Player.IsValid)return HookResult.Continue;
+        
         var PlayerTeam = Player.TeamNum;
         var PlayerSteamID = Player.SteamID;
+        Helper.PersonData personData = Helper.RetrievePersonDataById(PlayerSteamID);
 
         if (string.IsNullOrWhiteSpace(eventmessage)) return HookResult.Continue;
         string trimmedMessageStart = eventmessage.TrimStart();
@@ -181,13 +258,26 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 {
                     VoteGameModeMenu = new ChatMenu(Localizer["menu.music"]);
                 }
-                VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false));
+                if(personData.Client_Mute_MVP)
+                {
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.enabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                }else
+                {
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                }
+                VoteGameModeMenu.AddMenuOption(Localizer["menu.remove"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
                 foreach (var key in data.Keys)
                 {
                     string ChoosenKitKey = data[key]["MVP_Kit_Name"];
                     bool isVIP = data[key].ContainsKey("VIP") && bool.TryParse(data[key]["VIP"].ToString(), out bool vipValue) ? vipValue : false;
+                    bool isVVIP = data[key].ContainsKey("VVIP") && bool.TryParse(data[key]["VVIP"].ToString(), out bool vvipValue) ? vvipValue : false;
+                    bool isADMIN = data[key].ContainsKey("ADMIN") && bool.TryParse(data[key]["ADMIN"].ToString(), out bool adminValue) ? adminValue : false;
                     bool isPreviewAble = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValue) ? PreviewValue : false;
-                    VoteGameModeMenu.AddMenuOption(ChoosenKitKey, (Player, option) => HandleMenu(Player, option, key, isVIP, isPreviewAble));
+                    bool isHiddenItem = data[key].ContainsKey("HIDDEN") && bool.TryParse(data[key]["HIDDEN"].ToString(), out bool isHiddenItemValue) ? isHiddenItemValue : false;
+                    if(isHiddenItem && isVIP && !Globals.vip_Kit.ContainsKey(Player.SteamID))continue;
+                    if(isHiddenItem && isVVIP && !Globals.vvip_Kit.ContainsKey(Player.SteamID))continue;
+                    if(isHiddenItem && isADMIN && !Globals.admin_Kit.ContainsKey(Player.SteamID))continue;
+                    VoteGameModeMenu.AddMenuOption(ChoosenKitKey, (Player, option) => HandleMenu(Player, option, key, isVIP, isVVIP, isADMIN, isPreviewAble));
                 }
                 if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
                 {
@@ -209,13 +299,144 @@ public class MVPSoundsGoldKingZ : BasePlugin
         return HookResult.Continue;
     }
     
-    private void HandleMenu(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, bool isVIP, bool isPreviewAble)
+    private void HandleMenu(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, bool isVIP, bool isVVIP, bool isADMIN, bool isPreviewAble)
     {
+        Helper.PersonData personData = Helper.RetrievePersonDataById(Player.SteamID);
         var disabled = option.Text;
+        if(disabled == Localizer["menu.enabled"])
+        {
+            Globals.client_mute.Remove(Player.SteamID);
+            personData.Client_Mute_MVP = !personData.Client_Mute_MVP;
+            if(personData.Client_Mute_MVP)
+            {
+
+            }else
+            {
+                Helper.SaveToJsonFile(Player.SteamID, personData.MusicKit!, personData.Client_Mute_MVP, DateTime.Now);
+            }
+            
+            if(Configs.GetConfigData().MVP_UseMySql)
+            {
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        var connectionSettings = JsonConvert.DeserializeObject<MySqlDataManager.MySqlConnectionSettings>(await File.ReadAllTextAsync(Path.Combine(Path.Combine(ModuleDirectory, "config"), "MySql_Settings.json")));
+                        var connectionString = new MySqlConnectionStringBuilder
+                        {
+                            Server = connectionSettings!.MySqlHost,
+                            Port = (uint)connectionSettings.MySqlPort,
+                            Database = connectionSettings.MySqlDatabase,
+                            UserID = connectionSettings.MySqlUsername,
+                            Password = connectionSettings.MySqlPassword
+                        }.ConnectionString;
+                        
+                        using (var connection = new MySqlConnection(connectionString))
+                        {
+                            await connection.OpenAsync();
+                            await MySqlDataManager.CreatePersonDataTableIfNotExistsAsync(connection);
+
+                            DateTime personDate = DateTime.Now;
+                            var personData = Helper.RetrievePersonDataById(Player.SteamID);
+                            if (personData.PlayerSteamID != 0)
+                            {
+                                await MySqlDataManager.SaveToMySqlAsync(Player.SteamID, personData.MusicKit!, false, personDate, connection, connectionSettings);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"======================== ERROR =============================");
+                        Console.WriteLine($"An error occurred: {ex.Message}");
+                        Console.WriteLine($"======================== ERROR =============================");
+                    }
+                });
+            }
+            if (!string.IsNullOrEmpty(Localizer["player.musickit.enabled"]))
+            {
+                Helper.AdvancedPrintToChat(Player, Localizer["player.musickit.enabled"], option.Text);
+            }
+            MenuManager.CloseActiveMenu(Player);
+            return;
+        }
         if(disabled == Localizer["menu.disabled"])
         {
+            if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanToggleOffMVP) && !Globals.client_cantoggle.ContainsKey(Player.SteamID))
+            {
+                if (!string.IsNullOrEmpty(Localizer["player.disabled.not.allowed"]))
+                {
+                    Helper.AdvancedPrintToChat(Player, Localizer["player.disabled.not.allowed"]);
+                }
+                MenuManager.CloseActiveMenu(Player);
+                return;
+            }
+            if (!Globals.client_mute.ContainsKey(Player.SteamID))
+            {
+                Globals.client_mute.Add(Player.SteamID, true);
+            }
+            if (Globals.client_mute.ContainsKey(Player.SteamID))
+            {
+                Globals.client_mute[Player.SteamID] = true;
+            }
+            
+            personData.Client_Mute_MVP = !personData.Client_Mute_MVP;
+            if(personData.Client_Mute_MVP)
+            {
+                Helper.SaveToJsonFile(Player.SteamID, personData.MusicKit!, personData.Client_Mute_MVP, DateTime.Now);
+            }else
+            {
+                
+            }
+            if(Configs.GetConfigData().MVP_UseMySql)
+            {
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        var connectionSettings = JsonConvert.DeserializeObject<MySqlDataManager.MySqlConnectionSettings>(await File.ReadAllTextAsync(Path.Combine(Path.Combine(ModuleDirectory, "config"), "MySql_Settings.json")));
+                        var connectionString = new MySqlConnectionStringBuilder
+                        {
+                            Server = connectionSettings!.MySqlHost,
+                            Port = (uint)connectionSettings.MySqlPort,
+                            Database = connectionSettings.MySqlDatabase,
+                            UserID = connectionSettings.MySqlUsername,
+                            Password = connectionSettings.MySqlPassword
+                        }.ConnectionString;
+                        
+                        using (var connection = new MySqlConnection(connectionString))
+                        {
+                            await connection.OpenAsync();
+                            await MySqlDataManager.CreatePersonDataTableIfNotExistsAsync(connection);
+
+                            DateTime personDate = DateTime.Now;
+                            var personData = Helper.RetrievePersonDataById(Player.SteamID);
+                            if (personData.PlayerSteamID != 0)
+                            {
+                                await MySqlDataManager.SaveToMySqlAsync(Player.SteamID, personData.MusicKit!, true, personDate, connection, connectionSettings);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"======================== ERROR =============================");
+                        Console.WriteLine($"An error occurred: {ex.Message}");
+                        Console.WriteLine($"======================== ERROR =============================");
+                    }
+                });
+            }
+            if (!string.IsNullOrEmpty(Localizer["player.musickit.disabled"]))
+            {
+                Helper.AdvancedPrintToChat(Player, Localizer["player.musickit.disabled"], option.Text);
+            }
+            MenuManager.CloseActiveMenu(Player);
+            return;
+        }
+
+        if(disabled == Localizer["menu.remove"])
+        {
             Globals.Choosed_MVP.Remove(Player.SteamID);
-            Helper.SaveToJsonFile(Player.SteamID, disabled, DateTime.Now);
+            
+            Helper.SaveToJsonFile(Player.SteamID, disabled, personData.Client_Mute_MVP, DateTime.Now);
             if(Configs.GetConfigData().MVP_UseMySql)
             {
                 Task.Run(async () =>
@@ -243,9 +464,9 @@ public class MVPSoundsGoldKingZ : BasePlugin
                     }
                 });
             }
-            if (!string.IsNullOrEmpty(Localizer["player.musickit.disabled"]))
+            if (!string.IsNullOrEmpty(Localizer["player.musickit.remove"]))
             {
-                Helper.AdvancedPrintToChat(Player, Localizer["player.musickit.disabled"], option.Text);
+                Helper.AdvancedPrintToChat(Player, Localizer["player.musickit.remove"], option.Text);
             }
             MenuManager.CloseActiveMenu(Player);
             return;
@@ -253,9 +474,27 @@ public class MVPSoundsGoldKingZ : BasePlugin
         
         if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VipMusicKit) && !Globals.vip_Kit.ContainsKey(Player.SteamID) && isVIP && !isPreviewAble)
         {
-            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit"]))
+            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vip"]))
             {
-                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit"]);
+                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vip"]);
+            }
+            MenuManager.CloseActiveMenu(Player);
+            return;
+        }
+        if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VVipMusicKit) && !Globals.vvip_Kit.ContainsKey(Player.SteamID) && isVVIP && !isPreviewAble)
+        {
+            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vvip"]))
+            {
+                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vvip"]);
+            }
+            MenuManager.CloseActiveMenu(Player);
+            return;
+        }
+        if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_AdminMusicKit) && !Globals.admin_Kit.ContainsKey(Player.SteamID) && isADMIN && !isPreviewAble)
+        {
+            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.admin"]))
+            {
+                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.admin"]);
             }
             MenuManager.CloseActiveMenu(Player);
             return;
@@ -278,9 +517,9 @@ public class MVPSoundsGoldKingZ : BasePlugin
 
             foreach (string answer in answers)
             {
-                VoteGameModeMenu.AddMenuOption(answer, (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isPreviewAble, choosedkit));
+                VoteGameModeMenu.AddMenuOption(answer, (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isVVIP, isADMIN, isPreviewAble, choosedkit));
             }
-            VoteGameModeMenu.AddMenuOption(Localizer["menu.back"], (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isPreviewAble, choosedkit));
+            VoteGameModeMenu.AddMenuOption(Localizer["menu.back"], (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isVVIP, isADMIN, isPreviewAble, choosedkit));
             if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
             {
                 if (VoteGameModeMenu is CenterHtmlMenu centerHtmlMenu)
@@ -310,18 +549,37 @@ public class MVPSoundsGoldKingZ : BasePlugin
             Helper.AdvancedPrintToChat(Player, Localizer["player.musickit.selected"], option.Text);
         }
 
-        Helper.SaveToJsonFile(Player.SteamID, ChoosenKitKey, DateTime.Now);
+        Helper.SaveToJsonFile(Player.SteamID, ChoosenKitKey, personData.Client_Mute_MVP, DateTime.Now);
         MenuManager.CloseActiveMenu(Player);
     }
-    private void HandleMenu2(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, bool isVIP, bool isPreviewAble, string choosedkit)
+    private void HandleMenu2(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, bool isVIP, bool isVVIP, bool isADMIN, bool isPreviewAble, string choosedkit)
     {
+        Helper.PersonData personData = Helper.RetrievePersonDataById(Player.SteamID);
         if(option.Text == Localizer["menu.answer.yes"])
         {
             if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VipMusicKit) && !Globals.vip_Kit.ContainsKey(Player.SteamID) && isVIP)
             {
-                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit"]))
+                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vip"]))
                 {
-                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit"]);
+                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vip"]);
+                }
+                MenuManager.CloseActiveMenu(Player);
+                return;
+            }
+            if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VVipMusicKit) && !Globals.vvip_Kit.ContainsKey(Player.SteamID) && isVVIP)
+            {
+                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vvip"]))
+                {
+                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vvip"]);
+                }
+                MenuManager.CloseActiveMenu(Player);
+                return;
+            }
+            if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_AdminMusicKit) && !Globals.admin_Kit.ContainsKey(Player.SteamID) && isADMIN)
+            {
+                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.admin"]))
+                {
+                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.admin"]);
                 }
                 MenuManager.CloseActiveMenu(Player);
                 return;
@@ -338,7 +596,7 @@ public class MVPSoundsGoldKingZ : BasePlugin
             {
                 Helper.AdvancedPrintToChat(Player, Localizer["player.musickit.selected"], choosedkit);
             }
-            Helper.SaveToJsonFile(Player.SteamID, ChoosenKitKey, DateTime.Now);
+            Helper.SaveToJsonFile(Player.SteamID, ChoosenKitKey, personData.Client_Mute_MVP, DateTime.Now);
             MenuManager.CloseActiveMenu(Player);
         }else if(option.Text == Localizer["menu.answer.no"])
         {
@@ -369,28 +627,29 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 }
 
                 Random rng = new Random();
-
+                string soundPath = soundPaths.FirstOrDefault(path => !Globals.playedPaths.Contains(path))!;
+                
                 if (Globals.playedPaths.Count == soundPaths.Count)
                 {
                     Globals.playedPaths.Clear();
                 }
-
                 if (Globals.playedPaths.Count == 0)
                 {
                     soundPaths = soundPaths.OrderBy(x => rng.Next()).ToList();
                 }
+                if (soundPath == null || Globals.playedPaths.Count == 0)
+                {
+                    soundPath = soundPaths.FirstOrDefault(path => !Globals.playedPaths.Contains(path))!;
+                }
 
-                string soundPath = soundPaths.FirstOrDefault(path => !Globals.playedPaths.Contains(path))!;
                 if (soundPath != null)
                 {
-                    Globals.playedPaths.Add(soundPath);
-
                     if (!string.IsNullOrEmpty(Localizer["player.preview"]))
                     {
                         Helper.AdvancedPrintToChat(Player, Localizer["player.preview"], choosedkit);
                     }
                     Player.ExecuteClientCommand("play " + soundPath);
-                    
+                    Globals.playedPaths.Add(soundPath);
                 }
             }
             catch { }
@@ -411,13 +670,27 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 {
                     VoteGameModeMenu = new ChatMenu(Localizer["menu.music"]);
                 }
-                VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false));
+                if(personData.Client_Mute_MVP)
+                {
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.enabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                }else
+                {
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                }
+                
+                VoteGameModeMenu.AddMenuOption(Localizer["menu.remove"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
                 foreach (var key in data.Keys)
                 {
                     string ChoosenKitKeyy = data[key]["MVP_Kit_Name"];
-                    bool isVIPs = data[key].ContainsKey("VIP") && bool.TryParse(data[key]["VIP"].ToString(), out bool vipValue) ? vipValue : false;
-                    bool isPreviewAblee = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValue) ? PreviewValue : false;
-                    VoteGameModeMenu.AddMenuOption(ChoosenKitKeyy, (Player, option) => HandleMenu(Player, option, key, isVIPs, isPreviewAblee));
+                    bool isVIPs = data[key].ContainsKey("VIP") && bool.TryParse(data[key]["VIP"].ToString(), out bool vipValues) ? vipValues : false;
+                    bool isVVIPs = data[key].ContainsKey("VVIP") && bool.TryParse(data[key]["VVIP"].ToString(), out bool vvipValues) ? vvipValues : false;
+                    bool isADMINs = data[key].ContainsKey("ADMIN") && bool.TryParse(data[key]["ADMIN"].ToString(), out bool adminValues) ? adminValues : false;
+                    bool isPreviewAbles = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValues) ? PreviewValues : false;
+                    bool isHiddenItems = data[key].ContainsKey("HIDDEN") && bool.TryParse(data[key]["HIDDEN"].ToString(), out bool isHiddenItemValues) ? isHiddenItemValues : false;
+                    if(isHiddenItems && isVIPs && !Globals.vip_Kit.ContainsKey(Player.SteamID))continue;
+                    if(isHiddenItems && isVVIPs && !Globals.vvip_Kit.ContainsKey(Player.SteamID))continue;
+                    if(isHiddenItems && isADMINs && !Globals.admin_Kit.ContainsKey(Player.SteamID))continue;
+                    VoteGameModeMenu.AddMenuOption(ChoosenKitKeyy, (Player, option) => HandleMenu(Player, option, key, isVIPs, isVVIPs, isADMINs, isPreviewAbles));
                 }
                 if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
                 {
@@ -497,27 +770,29 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 }
 
                 Random rng = new Random();
-
+                string soundPath = soundPaths.FirstOrDefault(path => !Globals.playedPaths.Contains(path))!;
+                
+                if (Globals.playedPaths.Count == soundPaths.Count)
+                {
+                    Globals.playedPaths.Clear();
+                }
+                if (Globals.playedPaths.Count == 0)
+                {
+                    soundPaths = soundPaths.OrderBy(x => rng.Next()).ToList();
+                }
+                if (soundPath == null || Globals.playedPaths.Count == 0)
+                {
+                    soundPath = soundPaths.FirstOrDefault(path => !Globals.playedPaths.Contains(path))!;
+                }
+                
                 var allplayers = Helper.GetAllController();
                 allplayers.ForEach(players =>
                 {
-                    if (players != null && players.IsValid && !players.IsBot)
+                    if (players != null && players.IsValid && !players.IsBot && !Globals.client_mute.ContainsKey(players.SteamID))
                     {
-                        
-
-                        if (Globals.playedPaths.Count == soundPaths.Count)
-                        {
-                            Globals.playedPaths.Clear();
-                        }
-
-                        if (Globals.playedPaths.Count == 0)
-                        {
-                            soundPaths = soundPaths.OrderBy(x => rng.Next()).ToList();
-                        }
-
-                        string soundPath = soundPaths.FirstOrDefault(path => !Globals.playedPaths.Contains(path))!;
                         if (soundPath != null)
                         {
+                            
                             if(custommessage)
                             {
                                 if(messageChatEnabled)
@@ -575,11 +850,12 @@ public class MVPSoundsGoldKingZ : BasePlugin
                                     HUDTimer_Center_Bottom = AddTimer(messageCenterBottomInSecs, HUDTimer_Center_Bottom_Callback, TimerFlags.STOP_ON_MAPCHANGE);
                                 }
                             }
-                            Globals.playedPaths.Add(soundPath);
                             players.ExecuteClientCommand("play " + soundPath);
+                            Globals.playedPaths.Add(soundPath);
                         }
                     }
                 });
+                
             }
             catch { }
         }
@@ -599,7 +875,7 @@ public class MVPSoundsGoldKingZ : BasePlugin
         {
             foreach (var player in Helper.GetAllController())
             {
-                if (player == null || !player.IsValid || player.IsBot || player.IsHLTV) continue;
+                if (player == null || !player.IsValid || player.IsBot || player.IsHLTV || Globals.client_mute.ContainsKey(player.SteamID)) continue;
                 if(Globals.Show_Center)
                 {
                     StringBuilder builder = new StringBuilder();
@@ -634,7 +910,11 @@ public class MVPSoundsGoldKingZ : BasePlugin
 
         Globals.allow_groups.Remove(playerid);
         Globals.vip_Kit.Remove(playerid);
+        Globals.vvip_Kit.Remove(playerid);
+        Globals.admin_Kit.Remove(playerid);
         Globals.Choosed_MVP.Remove(playerid);
+        Globals.client_mute.Remove(playerid);
+        Globals.client_cantoggle.Remove(playerid);
 
         if(Configs.GetConfigData().MVP_UseMySql)
         {
@@ -661,7 +941,7 @@ public class MVPSoundsGoldKingZ : BasePlugin
                         var personData = Helper.RetrievePersonDataById(playerid);
                         if (personData.PlayerSteamID != 0)
                         {
-                            await MySqlDataManager.SaveToMySqlAsync(playerid, personData.MusicKit!, personDate, connection, connectionSettings);
+                            await MySqlDataManager.SaveToMySqlAsync(playerid, personData.MusicKit!, personData.Client_Mute_MVP, personDate, connection, connectionSettings);
                         }
                     }
                 }
