@@ -2,9 +2,7 @@
 
     "player.not.allowed": "{green}Gold KingZ {grey}| {darkred}Menu MVP é somente para {lime}VIPS",
     "player.disabled.not.allowed": "{green}Gold KingZ {grey}| {darkred}A opção de desabilitar MVP é somente para {lime}VIPS",
-    "player.not.allowed.musickit.vip": "{green}Gold KingZ {grey}| Essa música é {darkred}somente para Vips",
-    "player.not.allowed.musickit.vvip": "{green}Gold KingZ {grey}| Essa música é {darkred}somente para VVips",
-    "player.not.allowed.musickit.admin": "{green}Gold KingZ {grey}| Essa música é {darkred}somente para Admins",
+    "player.not.allowed.musickit.flag": "{green}Gold KingZ {grey}| Essa Música {darkred}é somente para Vips.",
     "player.preview": "{green}Gold KingZ {grey}| Tocando {purple}{0} {grey}somente para você.",
     "player.musickit.selected": "{green}Gold KingZ {grey}| Você selecionou a música {purple}{0}",
     "player.musickit.disabled": "{green}Gold KingZ {grey}| Músicas agora {darkred}Desabilitadas",
