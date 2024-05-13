@@ -1,4 +1,4 @@
-# [CS2] MVP-Sounds-GoldKingZ (1.0.4)
+# [CS2] MVP-Sounds-GoldKingZ (1.0.5)
 
 ### Custom MVP Sounds (Custom MVP Sounds + Vips)
 
@@ -38,15 +38,6 @@
   //Toggle In Game To Show MVP 
   "MVP_InGameMenu": "!mvp,!mvps,!mvpsound",
 
-  //VIP Music Kit in MVP_Settings.json "VIP"
-  "MVP_VipMusicKit": "@css/vip,#css/vip",
-
-  //VVIP Music Kit in MVP_Settings.json "VVIP"
-  "MVP_VVipMusicKit": "@css/vvip,#css/vvip",
-
-  //ADMIN Music Kit in MVP_Settings.json "ADMIN"
-  "MVP_AdminMusicKit": "@css/root,#css/admin",
-
   //First/Default Depend SteamID64 If He Have Music Kit Selected, This Will Get Ignored
   "MVP_DefaultMusicKitPerSteam": {
     "76561198206086993": "MVP_2",
@@ -83,7 +74,7 @@
 ```
 "CanBePreview" = Make Item PreviewAble Before Select
 
-"VIP","VVIP","ADMIN" = Depend Who Access To The Items in config.json
+"FLAGS" = Depend Who Access To The Items [ex of groups: @css/root,@css/admin,#css/admin] 
 
 "HIDDEN" = Will Make Only Who Has Access "VIP","VVIP","ADMIN" Can See The Item
 
@@ -124,9 +115,7 @@
 	
 	"player.not.allowed": "{green}Gold KingZ {grey}| {darkred}MVP Menu Is For {lime}VIPS {darkred}Only",
 	"player.disabled.not.allowed": "{green}Gold KingZ {grey}| {darkred}Disable MVP Is For {lime}VIPS {darkred}Only",
-	"player.not.allowed.musickit.vip": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
-	"player.not.allowed.musickit.vvip": "{green}Gold KingZ {grey}| This Music Kit For {darkred}VVips Only",
-	"player.not.allowed.musickit.admin": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Admins Only",
+	"player.not.allowed.musickit.flag": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
 	"player.preview": "{green}Gold KingZ {grey}| Playing {purple}{0} {grey}For You Only",
 	"player.musickit.selected": "{green}Gold KingZ {grey}| You Select Music Kit {purple}{0}",
 	"player.musickit.disabled": "{green}Gold KingZ {grey}| MVP Music Now {darkred}Disabled",
@@ -174,6 +163,13 @@
 
 ## .:[ Change Log ]:.
 ```
+(1.0.5)
+-Remove MVP_VVipMusicKit 
+-Remove MVP_AdminMusicKit 
+-Remove "VVIP" To Music Kit
+-Remove "ADMIN" To Music Kit
+-Added "FLAGS" To Music Kit
+
 (1.0.4)
 -Fix Sync Music To All
 -Added MVP_VVipMusicKit 
