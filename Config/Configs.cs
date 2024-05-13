@@ -98,9 +98,6 @@ namespace MVP_Sounds_GoldKingZ.Config
             public bool MVP_ForceDisableDefaultMVP_ToAll { get; set; }
             public bool MVP_ChangeMVPMenuFromChatToCentre { get; set; }
             public string MVP_InGameMenu { get; set; }
-            public string MVP_VipMusicKit { get; set; }
-            public string MVP_VVipMusicKit { get; set; }
-            public string MVP_AdminMusicKit { get; set; }
             public Dictionary<string, string> MVP_DefaultMusicKitPerSteam { get; set; }
             public string MVP_OnlyAllowTheseGroupsCanMVP { get; set; }
             public string MVP_OnlyAllowTheseGroupsCanToggleOffMVP { get; set; }
@@ -115,9 +112,6 @@ namespace MVP_Sounds_GoldKingZ.Config
                 MVP_ForceDisableDefaultMVP_ToAll = false;
                 MVP_ChangeMVPMenuFromChatToCentre = true;
                 MVP_InGameMenu = "!mvp,!mvps,!mvpsound";
-                MVP_VipMusicKit = "@css/vip,#css/vip";
-                MVP_VVipMusicKit = "@css/vvip,#css/vvip";
-                MVP_AdminMusicKit = "@css/root,#css/admin";
                 MVP_DefaultMusicKitPerSteam = new Dictionary<string, string>
                 {
                     { "76561198206086993", "MVP_2" },
