@@ -1,28 +1,47 @@
 {
 
     "player.not.allowed": "{green}Gold KingZ {grey}| {darkred}Menu MVP é somente para {lime}VIPS",
-    "player.not.allowed.musickit": "{green}Gold KingZ {grey}| Essa música é {darkred}somente para Vips",
+    "player.disabled.not.allowed": "{green}Gold KingZ {grey}| {darkred}A opção de desabilitar MVP é somente para {lime}VIPS",
+    "player.not.allowed.musickit.flag": "{green}Gold KingZ {grey}| Essa Música {darkred}é somente para Vips.",
     "player.preview": "{green}Gold KingZ {grey}| Tocando {purple}{0} {grey}somente para você.",
     "player.musickit.selected": "{green}Gold KingZ {grey}| Você selecionou a música {purple}{0}",
     "player.musickit.disabled": "{green}Gold KingZ {grey}| Músicas agora {darkred}Desabilitadas",
+    "player.musickit.enabled": "{green}Gold KingZ {grey}| Músicas agora {lime}Habilitadas",
+    "player.musickit.remove": "{green}Gold KingZ {grey}| Sua música foi agora {darkred}Removida",
     
     
     "now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é um MVP {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
     "now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <font color='white'>Tocando <font color='green'>{1} </font>",
     "now.playing.centre.bottom": "{0} é o MVP do round!! Tocando {1}",
 
-    "MVP_2.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round!! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull1.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+    "MVP_11.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+    "MVP_11.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/meandyou.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+	
+	"MVP_12.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+	"MVP_12.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/king.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+	
+	"MVP_13.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+	"MVP_13.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/soldiers.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
     
-    "MVP_12.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round!! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/9mm.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+	"MVP_14.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+	"MVP_14.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/melody.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
     
-    "MVP_13.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round! !!!!!!! {nextline}{green}Gold KingZ {grey}| Agora Tocando {purple}{1}",
-    "MVP_13.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round!! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull2.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
-    "MVP_13.now.playing.centre.bottom": "{0} é o MVP do round!! Tocando {1}",
+	"MVP_15.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+	"MVP_15.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull1.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+
+	"MVP_16.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+    "MVP_16.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/9mm.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+    
+    "MVP_17.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} é o MVP do round!!!!!!! {nextline}{green}Gold KingZ {grey}| Agora tocando {purple}{1}",
+    "MVP_17.now.playing.centre": "<font color='purple'>{0} <font color='white'>é o MVP do round! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull2.gif' class=''> <br> <br> <font color='white'>Tocando <font color='green'>{1} </font>",
+    "MVP_17.now.playing.centre.bottom": "{0} é o MVP do round!! Tocando {1}",
 
     "menu.music": ".:[ Menu de Música ]:.",
     "menu.are.you.sure": "Você tem certeza que quer [ {0} ] ?",
     "menu.answer.yes": "Sim",
     "menu.answer.no": "Não, Ver preview primeiro",
     "menu.back": "-> Voltar",
-    "menu.disabled": "Desabilitado/Remover MVP"
+    "menu.disabled": "Desabilitar todas as músicas MVP",
+    "menu.enabled": "Habilitar todas as músicas MVP",
+    "menu.remove": "Remover sua música"
 }
