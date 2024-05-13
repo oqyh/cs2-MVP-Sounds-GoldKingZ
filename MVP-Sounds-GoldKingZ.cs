@@ -13,7 +13,7 @@ namespace MVP_Sounds_GoldKingZ;
 public class MVPSoundsGoldKingZ : BasePlugin
 {
     public override string ModuleName => "Custom MVP Sounds (Custom MVP Sounds + Vips)";
-    public override string ModuleVersion => "1.0.4";
+    public override string ModuleVersion => "1.0.5";
     public override string ModuleAuthor => "Gold KingZ";
     public override string ModuleDescription => "https://github.com/oqyh";
     internal static IStringLocalizer? Stringlocalizer;
@@ -82,37 +82,6 @@ public class MVPSoundsGoldKingZ : BasePlugin
             }
         }
 
-        if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VipMusicKit) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_VipMusicKit))
-        {
-            if (!Globals.vip_Kit.ContainsKey(playerid))
-            {
-                Globals.vip_Kit.Add(playerid, true);
-            }
-
-        }
-        if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VVipMusicKit) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_VVipMusicKit))
-        {
-            if (!Globals.vvip_Kit.ContainsKey(playerid))
-            {
-                Globals.vvip_Kit.Add(playerid, true);
-            }
-
-        }
-        if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_AdminMusicKit) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_AdminMusicKit))
-        {
-            if (!Globals.vip_Kit.ContainsKey(playerid))
-            {
-                Globals.vip_Kit.Add(playerid, true);
-            }
-            if (!Globals.vvip_Kit.ContainsKey(playerid))
-            {
-                Globals.vvip_Kit.Add(playerid, true);
-            }
-            if (!Globals.admin_Kit.ContainsKey(playerid))
-            {
-                Globals.admin_Kit.Add(playerid, true);
-            }
-        }
         if(!string.IsNullOrEmpty(Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanToggleOffMVP) && Helper.IsPlayerInGroupPermission(player, Configs.GetConfigData().MVP_OnlyAllowTheseGroupsCanToggleOffMVP))
         {
             if (!Globals.client_cantoggle.ContainsKey(playerid))
@@ -260,24 +229,21 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 }
                 if(personData.Client_Mute_MVP)
                 {
-                    VoteGameModeMenu.AddMenuOption(Localizer["menu.enabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.enabled"], (Player, option) => HandleMenu(Player, option, string.Empty, null!, false));
                 }else
                 {
-                    VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, null!, false));
                 }
-                VoteGameModeMenu.AddMenuOption(Localizer["menu.remove"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                VoteGameModeMenu.AddMenuOption(Localizer["menu.remove"], (Player, option) => HandleMenu(Player, option, string.Empty, null!, false));
                 foreach (var key in data.Keys)
                 {
                     string ChoosenKitKey = data[key]["MVP_Kit_Name"];
-                    bool isVIP = data[key].ContainsKey("VIP") && bool.TryParse(data[key]["VIP"].ToString(), out bool vipValue) ? vipValue : false;
-                    bool isVVIP = data[key].ContainsKey("VVIP") && bool.TryParse(data[key]["VVIP"].ToString(), out bool vvipValue) ? vvipValue : false;
-                    bool isADMIN = data[key].ContainsKey("ADMIN") && bool.TryParse(data[key]["ADMIN"].ToString(), out bool adminValue) ? adminValue : false;
                     bool isPreviewAble = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValue) ? PreviewValue : false;
                     bool isHiddenItem = data[key].ContainsKey("HIDDEN") && bool.TryParse(data[key]["HIDDEN"].ToString(), out bool isHiddenItemValue) ? isHiddenItemValue : false;
-                    if(isHiddenItem && isVIP && !Globals.vip_Kit.ContainsKey(Player.SteamID))continue;
-                    if(isHiddenItem && isVVIP && !Globals.vvip_Kit.ContainsKey(Player.SteamID))continue;
-                    if(isHiddenItem && isADMIN && !Globals.admin_Kit.ContainsKey(Player.SteamID))continue;
-                    VoteGameModeMenu.AddMenuOption(ChoosenKitKey, (Player, option) => HandleMenu(Player, option, key, isVIP, isVVIP, isADMIN, isPreviewAble));
+                    string HasFlag = data[key].ContainsKey("FLAGS") ? data[key]["FLAGS"] : null!;
+
+                    if (isHiddenItem && !string.IsNullOrEmpty(HasFlag) && !Helper.IsPlayerInGroupPermission(Player, HasFlag))continue;
+                    VoteGameModeMenu.AddMenuOption(ChoosenKitKey, (Player, option) => HandleMenu(Player, option, key, HasFlag, isPreviewAble));
                 }
                 if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
                 {
@@ -299,7 +265,7 @@ public class MVPSoundsGoldKingZ : BasePlugin
         return HookResult.Continue;
     }
     
-    private void HandleMenu(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, bool isVIP, bool isVVIP, bool isADMIN, bool isPreviewAble)
+    private void HandleMenu(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, string HasFlag, bool isPreviewAble)
     {
         Helper.PersonData personData = Helper.RetrievePersonDataById(Player.SteamID);
         var disabled = option.Text;
@@ -472,33 +438,16 @@ public class MVPSoundsGoldKingZ : BasePlugin
             return;
         }
         
-        if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VipMusicKit) && !Globals.vip_Kit.ContainsKey(Player.SteamID) && isVIP && !isPreviewAble)
+        if(!string.IsNullOrEmpty(HasFlag) && !Helper.IsPlayerInGroupPermission(Player, HasFlag) && !isPreviewAble)
         {
-            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vip"]))
+            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.flag"]))
             {
-                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vip"]);
+                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.flag"]);
             }
             MenuManager.CloseActiveMenu(Player);
             return;
         }
-        if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VVipMusicKit) && !Globals.vvip_Kit.ContainsKey(Player.SteamID) && isVVIP && !isPreviewAble)
-        {
-            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vvip"]))
-            {
-                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vvip"]);
-            }
-            MenuManager.CloseActiveMenu(Player);
-            return;
-        }
-        if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_AdminMusicKit) && !Globals.admin_Kit.ContainsKey(Player.SteamID) && isADMIN && !isPreviewAble)
-        {
-            if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.admin"]))
-            {
-                Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.admin"]);
-            }
-            MenuManager.CloseActiveMenu(Player);
-            return;
-        }
+        
         if(isPreviewAble)
         {
             var choosedkit =  option.Text;
@@ -517,9 +466,9 @@ public class MVPSoundsGoldKingZ : BasePlugin
 
             foreach (string answer in answers)
             {
-                VoteGameModeMenu.AddMenuOption(answer, (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isVVIP, isADMIN, isPreviewAble, choosedkit));
+                VoteGameModeMenu.AddMenuOption(answer, (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, HasFlag, isPreviewAble, choosedkit));
             }
-            VoteGameModeMenu.AddMenuOption(Localizer["menu.back"], (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, isVIP, isVVIP, isADMIN, isPreviewAble, choosedkit));
+            VoteGameModeMenu.AddMenuOption(Localizer["menu.back"], (Player, option) => HandleMenu2(Player, option, ChoosenKitKey, HasFlag, isPreviewAble, choosedkit));
             if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
             {
                 if (VoteGameModeMenu is CenterHtmlMenu centerHtmlMenu)
@@ -552,34 +501,16 @@ public class MVPSoundsGoldKingZ : BasePlugin
         Helper.SaveToJsonFile(Player.SteamID, ChoosenKitKey, personData.Client_Mute_MVP, DateTime.Now);
         MenuManager.CloseActiveMenu(Player);
     }
-    private void HandleMenu2(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, bool isVIP, bool isVVIP, bool isADMIN, bool isPreviewAble, string choosedkit)
+    private void HandleMenu2(CCSPlayerController Player, ChatMenuOption option, string ChoosenKitKey, string HasFlag, bool isPreviewAble, string choosedkit)
     {
         Helper.PersonData personData = Helper.RetrievePersonDataById(Player.SteamID);
         if(option.Text == Localizer["menu.answer.yes"])
         {
-            if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VipMusicKit) && !Globals.vip_Kit.ContainsKey(Player.SteamID) && isVIP)
+            if(!string.IsNullOrEmpty(HasFlag) && !Helper.IsPlayerInGroupPermission(Player, HasFlag))
             {
-                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vip"]))
+                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.flag"]))
                 {
-                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vip"]);
-                }
-                MenuManager.CloseActiveMenu(Player);
-                return;
-            }
-            if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_VVipMusicKit) && !Globals.vvip_Kit.ContainsKey(Player.SteamID) && isVVIP)
-            {
-                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.vvip"]))
-                {
-                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.vvip"]);
-                }
-                MenuManager.CloseActiveMenu(Player);
-                return;
-            }
-            if (!string.IsNullOrEmpty(Configs.GetConfigData().MVP_AdminMusicKit) && !Globals.admin_Kit.ContainsKey(Player.SteamID) && isADMIN)
-            {
-                if (!string.IsNullOrEmpty(Localizer["player.not.allowed.musickit.admin"]))
-                {
-                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.admin"]);
+                    Helper.AdvancedPrintToChat(Player, Localizer["player.not.allowed.musickit.flag"]);
                 }
                 MenuManager.CloseActiveMenu(Player);
                 return;
@@ -672,25 +603,22 @@ public class MVPSoundsGoldKingZ : BasePlugin
                 }
                 if(personData.Client_Mute_MVP)
                 {
-                    VoteGameModeMenu.AddMenuOption(Localizer["menu.enabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.enabled"], (Player, option) => HandleMenu(Player, option, string.Empty, null!, false));
                 }else
                 {
-                    VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                    VoteGameModeMenu.AddMenuOption(Localizer["menu.disabled"], (Player, option) => HandleMenu(Player, option, string.Empty, null!, false));
                 }
                 
-                VoteGameModeMenu.AddMenuOption(Localizer["menu.remove"], (Player, option) => HandleMenu(Player, option, string.Empty, false, false, false, false));
+                VoteGameModeMenu.AddMenuOption(Localizer["menu.remove"], (Player, option) => HandleMenu(Player, option, string.Empty, null!, false));
                 foreach (var key in data.Keys)
                 {
                     string ChoosenKitKeyy = data[key]["MVP_Kit_Name"];
-                    bool isVIPs = data[key].ContainsKey("VIP") && bool.TryParse(data[key]["VIP"].ToString(), out bool vipValues) ? vipValues : false;
-                    bool isVVIPs = data[key].ContainsKey("VVIP") && bool.TryParse(data[key]["VVIP"].ToString(), out bool vvipValues) ? vvipValues : false;
-                    bool isADMINs = data[key].ContainsKey("ADMIN") && bool.TryParse(data[key]["ADMIN"].ToString(), out bool adminValues) ? adminValues : false;
                     bool isPreviewAbles = data[key].ContainsKey("CanBePreview") && bool.TryParse(data[key]["CanBePreview"].ToString(), out bool PreviewValues) ? PreviewValues : false;
                     bool isHiddenItems = data[key].ContainsKey("HIDDEN") && bool.TryParse(data[key]["HIDDEN"].ToString(), out bool isHiddenItemValues) ? isHiddenItemValues : false;
-                    if(isHiddenItems && isVIPs && !Globals.vip_Kit.ContainsKey(Player.SteamID))continue;
-                    if(isHiddenItems && isVVIPs && !Globals.vvip_Kit.ContainsKey(Player.SteamID))continue;
-                    if(isHiddenItems && isADMINs && !Globals.admin_Kit.ContainsKey(Player.SteamID))continue;
-                    VoteGameModeMenu.AddMenuOption(ChoosenKitKeyy, (Player, option) => HandleMenu(Player, option, key, isVIPs, isVVIPs, isADMINs, isPreviewAbles));
+                    string HasFlags = data[key].ContainsKey("FLAGS") ? data[key]["FLAGS"] : null!;
+
+                    if (isHiddenItems && !string.IsNullOrEmpty(HasFlags) && !Helper.IsPlayerInGroupPermission(Player, HasFlags))continue;
+                    VoteGameModeMenu.AddMenuOption(ChoosenKitKeyy, (Player, option) => HandleMenu(Player, option, key, HasFlags, isPreviewAbles));
                 }
                 if (Configs.GetConfigData().MVP_ChangeMVPMenuFromChatToCentre)
                 {
@@ -909,9 +837,6 @@ public class MVPSoundsGoldKingZ : BasePlugin
         DateTime personDate = DateTime.Now;
 
         Globals.allow_groups.Remove(playerid);
-        Globals.vip_Kit.Remove(playerid);
-        Globals.vvip_Kit.Remove(playerid);
-        Globals.admin_Kit.Remove(playerid);
         Globals.Choosed_MVP.Remove(playerid);
         Globals.client_mute.Remove(playerid);
         Globals.client_cantoggle.Remove(playerid);

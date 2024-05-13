@@ -98,9 +98,6 @@ public class Helper
     }
     public static void ClearVariables()
     {
-        Globals.vip_Kit.Clear();
-        Globals.vvip_Kit.Clear();
-        Globals.admin_Kit.Clear();
         Globals.playedPaths.Clear();
         Globals.Choosed_MVP.Clear();
         Globals.allow_groups.Clear();
@@ -152,175 +149,209 @@ public class Helper
         {
             var configData = new Dictionary<string, Dictionary<string, object>>
             {
-                ["MVP_1"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center_Bottom"] = true,
-                    ["Message_Center_Bottom_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Дурной Вкус",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/badtaste.vsnd_c",
-                    ["Sound_Path_2"] = "sounds/GoldKingZ/MVP/badtaste2.vsnd_c"
+                    "MVP_1", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center_Bottom", true},
+                        {"Message_Center_Bottom_InSecs", 10},
+                        {"MVP_Kit_Name", "Дурной Вкус"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/badtaste.vsnd_c"},
+                        {"Sound_Path_2", "sounds/GoldKingZ/MVP/badtaste2.vsnd_c"}
+                    }
                 },
-                ["MVP_2"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Center_Bottom"] = true,
-                    ["Message_Center_Bottom_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "History",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/history.vsnd_c"
+                    "MVP_2", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Center_Bottom", true},
+                        {"Message_Center_Bottom_InSecs", 10},
+                        {"MVP_Kit_Name", "History"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/history.vsnd_c"}
+                    }
                 },
-                ["MVP_3"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center_Bottom"] = true,
-                    ["Message_Center_Bottom_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "RATATA",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/ratata.vsnd_c"
+                    "MVP_3", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center_Bottom", true},
+                        {"Message_Center_Bottom_InSecs", 10},
+                        {"MVP_Kit_Name", "RATATA"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/ratata.vsnd_c"}
+                    }
                 },
-                ["MVP_4"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center_Bottom"] = true,
-                    ["Message_Center_Bottom_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "SWAT",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/swat.vsnd_c"
+                    "MVP_4", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center_Bottom", true},
+                        {"Message_Center_Bottom_InSecs", 10},
+                        {"MVP_Kit_Name", "SWAT"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/swat.vsnd_c"}
+                    }
                 },
-                ["MVP_5"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center_Bottom"] = true,
-                    ["Message_Center_Bottom_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Killin On Demand",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/demand.vsnd_c"
+                    "MVP_5", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center_Bottom", true},
+                        {"Message_Center_Bottom_InSecs", 10},
+                        {"MVP_Kit_Name", "Killin On Demand"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/demand.vsnd_c"}
+                    }
                 },
-                ["MVP_6"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Untitled 13",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/untitled13.vsnd_c"
+                    "MVP_6", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Untitled 13"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/untitled13.vsnd_c"}
+                    }
                 },
-                ["MVP_7"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Paranoia",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/paranoia.vsnd_c"
+                    "MVP_7", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Paranoia"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/paranoia.vsnd_c"}
+                    }
                 },
-                ["MVP_8"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Lord Pretty Flacko",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/lordprettyflacko.vsnd_c",
-                    ["Sound_Path_2"] = "sounds/GoldKingZ/MVP/lordprettyflacko2.vsnd_c"
+                    "MVP_8", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Lord Pretty Flacko"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/lordprettyflacko.vsnd_c"},
+                        {"Sound_Path_2", "sounds/GoldKingZ/MVP/lordprettyflacko2.vsnd_c"}
+                    }
                 },
-                ["MVP_9"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Who Got Beef With Me",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/beef.vsnd_c"
+                    "MVP_9", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Who Got Beef With Me"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/beef.vsnd_c"}
+                    }
                 },
-                ["MVP_10"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Two Twelve Subwoofer",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/twotwelvesubwoofer.vsnd_c"
+                    "MVP_10", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Two Twelve Subwoofer"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/twotwelvesubwoofer.vsnd_c"}
+                    }
                 },
-                ["MVP_11"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Ты и Я",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/uandme.vsnd_c"
+                    "MVP_11", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Ты и Я"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/uandme.vsnd_c"}
+                    }
                 },
-                ["MVP_12"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Separate ways",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/Separate.vsnd_c",
-                    ["Sound_Path_2"] = "sounds/GoldKingZ/MVP/Separate2.vsnd_c"
+                    "MVP_12", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Separate ways"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/Separate.vsnd_c"},
+                        {"Sound_Path_2", "sounds/GoldKingZ/MVP/Separate2.vsnd_c"}
+                    }
                 },
-                ["MVP_13"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "My Soldiers",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/soldiers.vsnd_c",
-                    ["Sound_Path_2"] = "sounds/GoldKingZ/MVP/soldiers2.vsnd_c"
+                    "MVP_13", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "My Soldiers"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/soldiers.vsnd_c"},
+                        {"Sound_Path_2", "sounds/GoldKingZ/MVP/soldiers2.vsnd_c"}
+                    }
                 },
-                ["MVP_14"] = new Dictionary<string, object>
                 {
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "What Is That Melody",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/melody.vsnd_c"
+                    "MVP_14", new Dictionary<string, object>
+                    {
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "What Is That Melody"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/melody.vsnd_c"}
+                    }
                 },
-                ["MVP_15"] = new Dictionary<string, object>
                 {
-                    ["VIP"] = true,
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "9mm (VIP)",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/9mm.vsnd_c"
+                    "MVP_15", new Dictionary<string, object>
+                    {
+                        {"FLAGS", "@css/vip,#css/vip"},
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "9mm (VIP)"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/9mm.vsnd_c"}
+                    }
                 },
-                ["MVP_16"] = new Dictionary<string, object>
                 {
-                    ["VVIP"] = true,
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "Go Hard Huh (VVIP)",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/gohardhuh.vsnd_c"
+                    "MVP_16", new Dictionary<string, object>
+                    {
+                        {"FLAGS", "@css/vvip,#css/vvip"},
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"MVP_Kit_Name", "Go Hard Huh (VVIP)"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/gohardhuh.vsnd_c"}
+                    }
                 },
-                ["MVP_17"] = new Dictionary<string, object>
                 {
-                    ["ADMIN"] = true,
-                    ["HIDDEN"] = true,
-                    ["CanBePreview"] = true,
-                    ["Custom_Message"] = true,
-                    ["Message_Chat"] = true,
-                    ["Message_Center"] = true,
-                    ["Message_Center_InSecs"] = 10,
-                    ["Message_Center_Bottom"] = true,
-                    ["Message_Center_Bottom_InSecs"] = 10,
-                    ["MVP_Kit_Name"] = "☠ Final Message ☠ (ADMIN)",
-                    ["Sound_Path_1"] = "sounds/GoldKingZ/MVP/finalmessage.vsnd_c",
-                    ["Sound_Path_2"] = "sounds/GoldKingZ/MVP/finalmessage2.vsnd_c"
+                    "MVP_17", new Dictionary<string, object>
+                    {
+                        {"FLAGS", "@css/root,#css/admin"},
+                        {"HIDDEN", true},
+                        {"CanBePreview", true},
+                        {"Custom_Message", true},
+                        {"Message_Chat", true},
+                        {"Message_Center", true},
+                        {"Message_Center_InSecs", 10},
+                        {"Message_Center_Bottom", true},
+                        {"Message_Center_Bottom_InSecs", 10},
+                        {"MVP_Kit_Name", "☠ Final Message ☠ (ADMIN)"},
+                        {"Sound_Path_1", "sounds/GoldKingZ/MVP/finalmessage.vsnd_c"},
+                        {"Sound_Path_2", "sounds/GoldKingZ/MVP/finalmessage2.vsnd_c"}
+                    }
                 }
             };
 
@@ -332,7 +363,7 @@ public class Helper
 
             string json = System.Text.Json.JsonSerializer.Serialize(configData, options);
 
-            json = "// Download https://github.com/Source2ZE/MultiAddonManager  With Gold KingZ WorkShop \n// https://steamcommunity.com/sharedfiles/filedetails/?id=3244740528\n// mm_extra_addons 3244740528\n// You Can Find WorkShop Path Sound In  https://github.com/oqyh/cs2-MVP-Sounds-GoldKingZ/blob/main/sounds/Gold%20KingZ%20WorkShop%20Sounds.txt\n// Info: \n// 'CanBePreview' = Make Item PreviewAble Before Select\n// 'VIP','VVIP','ADMIN' = Depend Who Access To The Items in config.json\n// 'HIDDEN' = Will Make Only Who Has Access 'VIP','VVIP','ADMIN' Can See The Item\n// 'Message_Chat' = Print Chat In Lang 'now.playing.chat'\n// 'Message_Center' = Print Center In Lang 'now.playing.centre'\n// 'Message_Center_Bottom' = Print Center Bottom In Lang 'now.playing.centre.bottom'\n// 'Custom_Message' = Will Switch All Messages To Separate Print In Lang 'MVP_X.now.playing' Depend MVP Kit Name\n// 'MVP_Kit_Name' = Music Kit Display Name\n// 'Sound_Path_X' = Music Path Start With 1 Put As Many As You Like  And It Will Play Randomly With No Duplicates \n\n" + json;
+            json = "// Download https://github.com/Source2ZE/MultiAddonManager  With Gold KingZ WorkShop \n// https://steamcommunity.com/sharedfiles/filedetails/?id=3244740528\n// mm_extra_addons 3244740528\n// You Can Find WorkShop Path Sound In  https://github.com/oqyh/cs2-MVP-Sounds-GoldKingZ/blob/main/sounds/Gold%20KingZ%20WorkShop%20Sounds.txt\n// Info: \n// 'CanBePreview' = Make Item PreviewAble Before Select\n// 'FLAGS' = Depend Who Access To The Items [ex of groups: @css/root,@css/admin,#css/admin] \n// 'HIDDEN' = Will Make Only Who Has Access 'VIP','VVIP','ADMIN' Can See The Item\n// 'Message_Chat' = Print Chat In Lang 'now.playing.chat'\n// 'Message_Center' = Print Center In Lang 'now.playing.centre'\n// 'Message_Center_Bottom' = Print Center Bottom In Lang 'now.playing.centre.bottom'\n// 'Custom_Message' = Will Switch All Messages To Separate Print In Lang 'MVP_X.now.playing' Depend MVP Kit Name\n// 'MVP_Kit_Name' = Music Kit Display Name\n// 'Sound_Path_X' = Music Path Start With 1 Put As Many As You Like  And It Will Play Randomly With No Duplicates \n\n" + json;
 
             File.WriteAllText(jsonFilePath, json);
         }
