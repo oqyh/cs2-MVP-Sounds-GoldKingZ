@@ -1,4 +1,4 @@
-# [CS2] MVP-Sounds-GoldKingZ (1.0.3)
+# [CS2] MVP-Sounds-GoldKingZ (1.0.4)
 
 ### Custom MVP Sounds (Custom MVP Sounds + Vips)
 
@@ -33,16 +33,31 @@
   "MVP_ForceDisableDefaultMVP_ToAll": false,
 
   //Change MVP Display Menu From Chat To Centre?
-  "MVP_ChangeMVPMenuFromChatToCentre": false,
+  "MVP_ChangeMVPMenuFromChatToCentre": true,
 
   //Toggle In Game To Show MVP 
   "MVP_InGameMenu": "!mvp,!mvps,!mvpsound",
 
   //VIP Music Kit in MVP_Settings.json "VIP"
-  "MVP_VipMusicKit": "@css/root,@css/admin,@css/vip,#css/admin,#css/vip",
+  "MVP_VipMusicKit": "@css/vip,#css/vip",
+
+  //VVIP Music Kit in MVP_Settings.json "VVIP"
+  "MVP_VVipMusicKit": "@css/vvip,#css/vvip",
+
+  //ADMIN Music Kit in MVP_Settings.json "ADMIN"
+  "MVP_AdminMusicKit": "@css/root,#css/admin",
+
+  //First/Default Depend SteamID64 If He Have Music Kit Selected, This Will Get Ignored
+  "MVP_DefaultMusicKitPerSteam": {
+    "76561198206086993": "MVP_2",
+    "76561198974936845": "MVP_3"
+  },
 
   //Only Allow These Groups To Have Access To MVP_InGameMenu (Making Empty "" Means Everyone Has Access) [ex of groups: "@css/root,@css/admin,#css/admin"]
   "MVP_OnlyAllowTheseGroupsCanMVP": "",
+
+  //Only Allow These Groups To Disable MVP Client Side (Making Empty "" Means Everyone Has Access) [ex of groups: "@css/root,@css/admin,#css/admin"]
+  "MVP_OnlyAllowTheseGroupsCanToggleOffMVP": "@css/root,@css/admin,@css/vip,#css/admin,#css/vip",
 
   //Auto Delete Inactive Players Cookies Older Than X Days plugins/MVP-Sounds-GoldKingZ/Cookies/MVP_Sounds_Cookies.json
   "MVP_AutoRemovePlayerCookieOlderThanXDays": 7,
@@ -66,21 +81,23 @@
 > You Can Find WorkShop Path Sounds In  https://github.com/oqyh/cs2-MVP-Sounds-GoldKingZ/blob/main/sounds/Gold%20KingZ%20WorkShop%20Sounds.txt                                                                                                                           
                                                                                                                        
 ```
-  "VIP" : Make Item Vip Only (For Who In "MVP_VipMusicKit" in config.json)
+"CanBePreview" = Make Item PreviewAble Before Select
 
-  "CanBePreview" : Make Item Can Be Preview Before Selected
-  
-  "Custom_Message" : Switch To MVP_X.now.playing.centre For Custom Message
-  "Message_Chat" : Message In Chat "now.playing.chat"
-  "Message_Center" : Message In Center  "now.playing.centre"
-  "Message_Center_Bottom" : Message In Center Bottom "now.playing.centre.bottom"
+"VIP","VVIP","ADMIN" = Depend Who Access To The Items in config.json
 
-  "Message_Center_InSecs" : How Much Show "Message_Center" In Secs
-  "Message_Center_Bottom_InSecs" : How Much Show "Message_Center_Bottom" In Secs 
+"HIDDEN" = Will Make Only Who Has Access "VIP","VVIP","ADMIN" Can See The Item
 
-  "MVP_Kit_Name" : Music Kit Name
-  
-  "Sound_Path_X" : You CaN Add Multiple Sounds In One Music Kit
+"Message_Chat" = Print Chat In Lang "now.playing.chat"
+
+"Message_Center" = Print Center In Lang "now.playing.centre"
+
+"Message_Center_Bottom" = Print Center Bottom In Lang "now.playing.centre.bottom"
+
+"Custom_Message" = Will Switch All Messages To Separate Print In Lang "MVP_X.now.playing" Depend MVP Kit Name
+
+"MVP_Kit_Name" = Music Kit Display Name
+
+"Sound_Path_X" = Music Path Start With 1 Put As Many As You Like  And It Will Play Randomly With No Duplicates 
 ```
 
 
@@ -106,36 +123,68 @@
 	
 	
 	"player.not.allowed": "{green}Gold KingZ {grey}| {darkred}MVP Menu Is For {lime}VIPS {darkred}Only",
-	"player.not.allowed.musickit": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
+	"player.disabled.not.allowed": "{green}Gold KingZ {grey}| {darkred}Disable MVP Is For {lime}VIPS {darkred}Only",
+	"player.not.allowed.musickit.vip": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Vips Only",
+	"player.not.allowed.musickit.vvip": "{green}Gold KingZ {grey}| This Music Kit For {darkred}VVips Only",
+	"player.not.allowed.musickit.admin": "{green}Gold KingZ {grey}| This Music Kit For {darkred}Admins Only",
 	"player.preview": "{green}Gold KingZ {grey}| Playing {purple}{0} {grey}For You Only",
 	"player.musickit.selected": "{green}Gold KingZ {grey}| You Select Music Kit {purple}{0}",
-	"player.musickit.disabled": "{green}Gold KingZ {grey}| MVP Music Kit Now {darkred}Disabled",
+	"player.musickit.disabled": "{green}Gold KingZ {grey}| MVP Music Now {darkred}Disabled",
+	"player.musickit.enabled": "{green}Gold KingZ {grey}| MVP Music Now {lime}Enabled",
+	"player.musickit.remove": "{green}Gold KingZ {grey}| Your Custom MVP Sounds is Now {darkred}Removed",
 	
 	
 	"now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
 	"now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <font color='white'>Playing <font color='green'>{1} </font>",
 	"now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
 	
-	"MVP_2.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull1.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	"MVP_11.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_11.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/meandyou.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
 	
-	"MVP_12.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/9mm.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	"MVP_12.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_12.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/king.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
 	
 	"MVP_13.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
-	"MVP_13.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull2.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
-	"MVP_13.now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
+	"MVP_13.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/soldiers.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	
+	"MVP_14.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_14.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/melody.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	
+	"MVP_15.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_15.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull1.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	
+	"MVP_16.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_16.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/9mm.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	
+	"MVP_17.now.playing.chat": "{green}Gold KingZ {grey}| {lightblue}{0} {grey} Is MVP Of The Match !!!!!!! {nextline}{green}Gold KingZ {grey}| Now Playing {purple}{1}",
+	"MVP_17.now.playing.centre": "<font color='purple'>{0} <font color='white'>Is MVP Of The Match! <br> <img src='https://raw.githubusercontent.com/oqyh/cs2-MVP-Sounds-GoldKingZ/main/Resources/skull2.gif' class=''> <br> <br> <font color='white'>Playing <font color='green'>{1} </font>",
+	"MVP_17.now.playing.centre.bottom": "{0} Is MVP Of The Match! Playing   {1}",
 	
 	"menu.music": ".:[ Music Menu ]:.",
 	"menu.are.you.sure": "You Want [ {0} ] ?",
 	"menu.answer.yes": "Yes",
 	"menu.answer.no": "No, Preview It First",
 	"menu.back": "-> Back",
-	"menu.disabled": "Disabled/Remove MVP"
+	"menu.disabled": "Disabled All MVP Sounds",
+	"menu.enabled": "Enabled All MVP Sounds",
+	"menu.remove": "Remove Your Custom MVP Sound"
 }
 ```
 
 
 ## .:[ Change Log ]:.
 ```
+(1.0.4)
+-Fix Sync Music To All
+-Added MVP_VVipMusicKit 
+-Added MVP_AdminMusicKit 
+-Added MVP_DefaultMusicKitPerSteam 
+-Added MVP_OnlyAllowTheseGroupsCanToggleOffMVP
+-Added "HIDDEN" To Music Kit
+-Added "VVIP" To Music Kit
+-Added "ADMIN" To Music Kit
+-Added Extra Music In Workshop 3244740528
+
 (1.0.3)
 -Fix Crash
 -Fix Message Centre and  Centre Bottom Not Shown To Dead People
