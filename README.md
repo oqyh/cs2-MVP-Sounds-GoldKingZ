@@ -76,7 +76,7 @@
 
 "FLAGS" = Depend Who Access To The Items [ex of groups: @css/root,@css/admin,#css/admin] 
 
-"HIDDEN" = Will Make Only Who Has Access "VIP","VVIP","ADMIN" Can See The Item
+"HIDDEN" = Will Make Only Who Has Access "FLAGS" Can See The Item
 
 "Message_Chat" = Print Chat In Lang "now.playing.chat"
 
