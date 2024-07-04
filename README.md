@@ -1,3 +1,8 @@
+## .:[ Join Our Discord For Support ]:.
+
+![Discord Banner 2](https://discord.com/api/guilds/651838917687115806/widget.png?style=banner2)
+
+***
 # [CS2] MVP-Sounds-GoldKingZ (1.0.5)
 
 ### Custom MVP Sounds (Custom MVP Sounds + Vips)
