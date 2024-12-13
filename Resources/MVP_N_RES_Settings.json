@@ -1,0 +1,351 @@
+{
+	"RES.Lithe - Hold Out":
+	{
+		"ShowChat": true,
+		"ShowCenter": 10,
+		"Sound_Paths":
+		[
+			"sounds/goldkingz/res/100_volume/holdout1.vsnd",
+			"sounds/goldkingz/res/100_volume/holdout2.vsnd"
+		]
+	},
+	"RES.What Is That Melody":
+	{
+		"ShowChat": true,
+		"ShowCenter": 10,
+		"Sound_Paths":
+		[
+			"sounds/goldkingz/res/100_volume/melody.vsnd"
+		]
+	},
+	"RES.Two Twelve Subwoofer":
+	{
+		"ShowChat": true,
+		"ShowCenter": 10,
+		"Sound_Paths":
+		[
+			"sounds/goldkingz/res/100_volume/twotwelvesubwoofer.vsnd"
+		]
+	},
+	"RES.Untitled #13 - Glwzbll":
+	{
+		"ShowChat": true,
+		"ShowCenter": 10,
+		"Sound_Paths":
+		[
+			"sounds/goldkingz/res/100_volume/untitled13.vsnd"
+		]
+	},
+	"RES.NXCRE & The Villains - USURPER":
+	{
+		"ShowChat": true,
+		"ShowCenter": 10,
+		"Sound_Paths":
+		[
+			"sounds/goldkingz/res/100_volume/usurper1.vsnd",
+			"sounds/goldkingz/res/100_volume/usurper2.vsnd",
+			"sounds/goldkingz/res/100_volume/usurper3.vsnd"
+		]
+	},
+	"RES.Вектор А - Напоследок":
+	{
+		"ShowChat": true,
+		"ShowCenter_Bottom": 5,
+		"Sound_Paths":
+		[
+			"sounds/goldkingz/res/100_volume/finally.vsnd"
+		]
+	},
+	
+	"SubMenu.STATUS.MVPSELECTED. Selected:":{},
+	"SubMenu.STATUS.MVPNONSELECTED.None":{},
+	
+	"Menu.Settings":
+	{
+		"SubMenu.STATUS.MVPVOL.Mvp Vol:":{},
+		"SubMenu.STATUS.MVPCHAT.Mvp Chat:":{},
+		"SubMenu.STATUS.MVPCENTER.Mvp Center:":{},
+		"SubMenu.STATUS.MVPCENTERBOTTOM.Mvp Center Bottom:":{},
+		
+		"SubMenu.STATUS.RESVOL.Res Vol:":{},
+		"SubMenu.STATUS.RESCHAT.Res Chat:":{},
+		"SubMenu.STATUS.RESCENTER.Res Center:":{},
+		"SubMenu.STATUS.RESCENTERBOTTOM.Res Center Bottom:":{}
+	},
+	"Menu.Free MVPs":
+	{
+		"SubMenu.9MM - Memphis Cult":
+		{
+			"Unique_Name": "9mm",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/9mm.vsnd"
+			]
+		},
+		"SubMenu.дурной вкус - пластинки":
+		{
+			"Unique_Name": "badtaste",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/badtaste1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/badtaste2.vsnd"
+			]
+		},
+		"SubMenu.Playboi Carti - Beef":
+		{
+			"Unique_Name": "beef",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/beef.vsnd"
+			]
+		},
+		"SubMenu.BigXthaPlug - Change Me":
+		{
+			"Unique_Name": "changeme",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/changeme1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/changeme2.vsnd"
+			]
+		},
+		"SubMenu.Freddie Dredd - Killin":
+		{
+			"Unique_Name": "killin",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter_Bottom": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/demand.vsnd"
+			]
+		},
+		"SubMenu.Chris Grey - Different":
+		{
+			"Unique_Name": "different",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter_Bottom": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/different1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/different2.vsnd"
+			]
+		},
+		"SubMenu.Lithe - Fall Back":
+		{
+			"Unique_Name": "fallback",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter_Bottom": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/fallback1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/fallback2.vsnd"
+			]
+		},
+		"SubMenu.Ur Final Message":
+		{
+			"Unique_Name": "finalmsg",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/finalmessage1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/finalmessage2.vsnd"
+			]
+		},
+		"SubMenu.GoHardHuh":
+		{
+			"Unique_Name": "gohardhuh",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/gohardhuh.vsnd"
+			]
+		},
+		"SubMenu.History":
+		{
+			"Unique_Name": "history",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/history.vsnd"
+			]
+		},
+		"SubMenu.OT - Johnny Dang":
+		{
+			"Unique_Name": "johnny",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/johnny1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/johnny2.vsnd"
+			]
+		},
+		"SubMenu.A$AP - Lord Pretty Flacko":
+		{
+			"Unique_Name": "asaplord",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/lordprettyflacko1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/lordprettyflacko2.vsnd"
+			]
+		},
+		"SubMenu.Tommy - Million Dollar Baby":
+		{
+			"Unique_Name": "dollarbaby",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/million1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/million2.vsnd"
+			]
+		},
+		"SubMenu.Xavier Wulf - Psycho Pass":
+		{
+			"Unique_Name": "psycho",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/psycho1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/psycho2.vsnd"
+			]
+		},
+		"SubMenu.If We Being Real":
+		{
+			"Unique_Name": "beingreal",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/real1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/real2.vsnd"
+			]
+		},
+		"SubMenu.Separate Ways":
+		{
+			"Unique_Name": "separate",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/separate1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/separate2.vsnd"
+			]
+		},
+		"SubMenu.I Dont Care About You":
+		{
+			"Unique_Name": "idc",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/swat.vsnd"
+			]
+		},
+		"SubMenu.Xcho - Ты и Я":
+		{
+			"Unique_Name": "uandme",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/uandme.vsnd"
+			]
+		}
+	},
+	"Menu.Vip MVPs":
+	{
+		"SubMenu.Hanumankind - Big Dawgs":
+		{
+			"Unique_Name": "bigdawgs",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/bigdawgs1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/bigdawgs2.vsnd",
+				"sounds/goldkingz/mvp/100_volume/bigdawgs3.vsnd"
+			]
+		},
+		"SubMenu.Ratatatataa":
+		{
+			"Unique_Name": "ratata",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/ratata.vsnd"
+			]
+		}
+	},
+	"Menu.Admins Only":
+	{
+		"Hide_It_And_Show_Only_ForFlags": "@css/admin,#css/admin",
+		"SubMenu.Misha Xramovi - B экстазе":
+		{
+			"Unique_Name": "ecstasy",
+			
+			"Make_It_Previewable": true,
+			"ShowChat": true,
+			"ShowCenter": 10,
+			"Sound_Paths":
+			[
+				"sounds/goldkingz/mvp/100_volume/ecstasy1.vsnd",
+				"sounds/goldkingz/mvp/100_volume/ecstasy2.vsnd"
+			]
+		}
+	}
+}
